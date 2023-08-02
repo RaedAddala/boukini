@@ -60,12 +60,12 @@ const TextStyle gSecondaryTitleTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
 );
 
-const double gButtonTextSize = 16;
+const double gButtonTextSize = 18;
 
 const TextStyle gButtonTextStyle = TextStyle(
   color: gThemeOnPrimaryTextColor,
   fontSize: gButtonTextSize,
-  fontWeight: FontWeight.w400,
+  fontWeight: FontWeight.w500,
 );
 const double gTextSize = 14;
 

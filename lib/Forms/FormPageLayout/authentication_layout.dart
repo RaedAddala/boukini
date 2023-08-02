@@ -51,7 +51,7 @@ class AuthenticationLayout extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      iconSize: gTitleTextSize * 1.3,
+                      iconSize: gTitleTextSize * 1.4,
                       onPressed: () {
                         onBackPressed!();
                       },
@@ -84,7 +84,32 @@ class AuthenticationLayout extends StatelessWidget {
               ),
               gSmallVerSpace,
               form,
-              gHugeVerSpace,
+              gTinyVerSpace,
+              Container(
+                width: double.infinity,
+                height: 50,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: gThemePrimaryColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState != null &&
+                        formKey.currentState!.validate()) {
+                      onMainButtonTapped();
+                    }
+                  },
+                  child: busy
+                      ? const CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        )
+                      : Text(
+                          mainButtonTitle,
+                          style: gButtonTextStyle,
+                        ),
+                ),
+              ),
             ],
           ),
         ),
@@ -92,7 +117,6 @@ class AuthenticationLayout extends StatelessWidget {
     );
   }
 }
-
 //     return SingleChildScrollView(
 //       child: Container(
 //         padding: const EdgeInsets.all(25),

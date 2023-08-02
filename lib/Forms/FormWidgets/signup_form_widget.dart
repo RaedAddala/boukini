@@ -25,7 +25,7 @@ class SignUpFormState extends State<SignUpForm> {
     final TextEditingController confirmPass = TextEditingController();
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 7.0),
+      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 7.0),
       child: FormBuilder(
         key: formKey,
         child: Column(
