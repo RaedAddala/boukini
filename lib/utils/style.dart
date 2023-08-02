@@ -25,7 +25,9 @@ const EdgeInsetsGeometry gElementHorizantalSmallPadding =
 */
 
 // Buttons Color:
+const Color gThemeFormColor = Color(0xff0096c7);
 const Color gThemePrimaryColor = Color(0xff0077b6);
+
 // Background Color
 const Color gThemeSecondartyColor = Color(0xfff8f7ff);
 // Text on buttons

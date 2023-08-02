@@ -6,6 +6,8 @@ import 'package:hotel_booking/utils/forminput_formatters.dart';
 import 'package:hotel_booking/utils/spaces.dart';
 import 'package:hotel_booking/utils/style.dart';
 
+import 'form_style.dart';
+
 class SignUpForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
   const SignUpForm({super.key, required this.formKey});
@@ -18,10 +20,7 @@ class SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     final formKey = widget.formKey;
-
-    final theme = Theme.of(context);
-    final secondaryColor = theme.colorScheme.secondary;
-
+    const requiredMessage = "Field can't be empty";
     final TextEditingController pass = TextEditingController();
     final TextEditingController confirmPass = TextEditingController();
 
@@ -42,28 +41,25 @@ class SignUpFormState extends State<SignUpForm> {
                   CardNumberInputFormatter(),
                 ],
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: InputDecoration(
-                  label: const Text("Credit Card"),
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: formFillColor,
+                  border: formBorder,
+                  focusedBorder: formFocusedBorder,
+                  label: Text("Credit Card"),
                   prefixIcon: Icon(
                     Icons.credit_card_outlined,
-                    color: secondaryColor,
+                    color: gThemePrimaryColor,
                   ),
-                  border: const OutlineInputBorder(),
-                  labelStyle: TextStyle(color: secondaryColor),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.5,
-                      color: secondaryColor,
-                    ),
-                  ),
+                  labelStyle: labelStyle,
                 ),
                 validator: FormBuilderValidators.compose(
                   [
                     FormBuilderValidators.required(
-                      errorText: ('this field must be filled'),
+                      errorText: requiredMessage,
                     ),
                     FormBuilderValidators.creditCard(
-                      errorText: ('Enter a valid credit card number'),
+                      errorText: 'Enter a valid credit card number',
                     ),
                   ],
                 ),
@@ -83,20 +79,30 @@ class SignUpFormState extends State<SignUpForm> {
                         FilteringTextInputFormatter.digitsOnly,
                         LengthLimitingTextInputFormatter(4),
                       ],
-                      decoration: InputDecoration(
-                        label: const Text("Security code"),
-                        border: const OutlineInputBorder(),
-                        labelStyle: TextStyle(color: secondaryColor),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 2.5,
-                            color: secondaryColor,
+                      validator: FormBuilderValidators.compose(
+                        [
+                          FormBuilderValidators.required(
+                            errorText: requiredMessage,
                           ),
-                        ),
+                          (String? val) {
+                            if (val != null && val.length < 3) {
+                              return "Must contain atleast 3 digits";
+                            }
+                            return null;
+                          }
+                        ],
+                      ),
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: formFillColor,
+                        border: formBorder,
+                        focusedBorder: formFocusedBorder,
+                        label: Text("Security Code"),
+                        labelStyle: labelStyle,
                       ),
                     ),
                   ),
-                  gBigHorSpace,
+                  gMidHorSpace,
                   Expanded(
                     child: FormBuilderTextField(
                       name: "Expires",
@@ -108,16 +114,26 @@ class SignUpFormState extends State<SignUpForm> {
                         CardMonthFilteringText(),
                         CardMonthInputFormatter(),
                       ],
-                      decoration: InputDecoration(
-                        label: const Text("MM/YY"),
-                        border: const OutlineInputBorder(),
-                        labelStyle: TextStyle(color: secondaryColor),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 2.5,
-                            color: secondaryColor,
+                      validator: FormBuilderValidators.compose(
+                        [
+                          FormBuilderValidators.required(
+                            errorText: requiredMessage,
                           ),
-                        ),
+                          (String? val) {
+                            if (val != null && val.length < 5) {
+                              return "Fill this field";
+                            }
+                            return null;
+                          }
+                        ],
+                      ),
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: formFillColor,
+                        border: formBorder,
+                        focusedBorder: formFocusedBorder,
+                        label: Text("Expiry Date"),
+                        labelStyle: labelStyle,
                       ),
                     ),
                   ),
@@ -128,33 +144,30 @@ class SignUpFormState extends State<SignUpForm> {
               padding: gElementVerticalSmallPadding,
               child: FormBuilderTextField(
                 name: 'Name on Card',
-                decoration: InputDecoration(
-                  label: const Text("Name on Card"),
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: formFillColor,
+                  border: formBorder,
+                  focusedBorder: formFocusedBorder,
+                  label: Text("Name on Card"),
                   prefixIcon: Icon(
                     Icons.person_outline_rounded,
-                    color: secondaryColor,
+                    color: gThemePrimaryColor,
                   ),
-                  border: const OutlineInputBorder(),
-                  labelStyle: TextStyle(color: secondaryColor),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.5,
-                      color: secondaryColor,
-                    ),
-                  ),
+                  labelStyle: labelStyle,
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: FormBuilderValidators.compose(
                   [
                     FormBuilderValidators.required(
-                      errorText: "Field must be filled",
+                      errorText: requiredMessage,
                     ),
                     (String? val) {
                       if (val != null &&
                           val.isNotEmpty &&
                           !RegExp(r'^[a-zA-Z]*( *[a-zA-Z]+)* *$')
                               .hasMatch(val.trim())) {
-                        return "Invalid String for fullname field";
+                        return "Invalid String for Fullname field";
                       }
                       return null;
                     },
@@ -168,20 +181,17 @@ class SignUpFormState extends State<SignUpForm> {
                 name: 'Email',
                 keyboardType: TextInputType.emailAddress,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: InputDecoration(
-                  label: const Text("Email"),
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: formFillColor,
+                  border: formBorder,
+                  focusedBorder: formFocusedBorder,
+                  label: Text("Email"),
                   prefixIcon: Icon(
                     Icons.mail_outlined,
-                    color: secondaryColor,
+                    color: gThemePrimaryColor,
                   ),
-                  border: const OutlineInputBorder(),
-                  labelStyle: TextStyle(color: secondaryColor),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.5,
-                      color: secondaryColor,
-                    ),
-                  ),
+                  labelStyle: labelStyle,
                 ),
                 validator: FormBuilderValidators.email(
                   errorText: 'Enter a valid email',
@@ -197,50 +207,29 @@ class SignUpFormState extends State<SignUpForm> {
                 validator: FormBuilderValidators.compose(
                   [
                     FormBuilderValidators.required(
-                      errorText: ('this field must be filled'),
+                      errorText: requiredMessage,
                     ),
                     FormBuilderValidators.minLength(
                       8,
-                      errorText: ('must contain 8 characters or more'),
+                      errorText: 'Must contain 8 characters or more',
                     ),
-                    (String? password) {
-                      if (!password!.contains(RegExp(r"[a-z]"))) {
-                        return "must contain atleast one lowercase letter";
-                      }
-                      if (!password.contains(RegExp(r"[A-Z]"))) {
-                        return "must contain atleast one uppercase letter";
-                      }
-                      if (!password.contains(RegExp(r"[0-9]"))) {
-                        return "must contain atleast one digit";
-                      }
-                      if (!password
-                          .contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-                        return "must contain atleast one special character";
-                      }
-                      return null;
-                    },
+                    passwordCheck,
                   ],
                 ),
                 controller: pass,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: formFillColor,
+                  border: formBorder,
+                  focusedBorder: formFocusedBorder,
                   hintText: "Enter New Password",
-                  hintStyle: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 8,
-                      fontWeight: FontWeight.w100),
-                  label: const Text("Password"),
+                  hintStyle: gBodyTextStyle,
+                  label: Text("Password"),
                   prefixIcon: Icon(
                     Icons.lock_outlined,
-                    color: secondaryColor,
+                    color: gThemePrimaryColor,
                   ),
-                  border: const OutlineInputBorder(),
-                  labelStyle: TextStyle(color: secondaryColor),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.5,
-                      color: secondaryColor,
-                    ),
-                  ),
+                  labelStyle: labelStyle,
                 ),
               ),
             ),
@@ -254,38 +243,24 @@ class SignUpFormState extends State<SignUpForm> {
                 validator: FormBuilderValidators.compose(
                   [
                     FormBuilderValidators.required(
-                      errorText: ('this field must be filled'),
+                      errorText: requiredMessage,
                     ),
-                    (String? password) {
-                      if (password != null && password.isEmpty) {
-                        return "Please Re-Enter New Password";
-                      }
-                      if (password != pass.text) {
-                        return 'Password must be same as above';
-                      }
-                      return null;
-                    },
+                    passwordCheck,
                   ],
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: formFillColor,
+                  border: formBorder,
+                  focusedBorder: formFocusedBorder,
                   hintText: "Re-Enter New Password",
-                  hintStyle: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 8,
-                      fontWeight: FontWeight.w100),
-                  label: const Text("Confirm Password"),
+                  hintStyle: gBodyTextStyle,
+                  label: Text("Confirm Password"),
                   prefixIcon: Icon(
                     Icons.lock_outlined,
-                    color: secondaryColor,
+                    color: gThemePrimaryColor,
                   ),
-                  border: const OutlineInputBorder(),
-                  labelStyle: TextStyle(color: secondaryColor),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.5,
-                      color: secondaryColor,
-                    ),
-                  ),
+                  labelStyle: labelStyle,
                 ),
               ),
             ),
@@ -294,4 +269,20 @@ class SignUpFormState extends State<SignUpForm> {
       ),
     );
   }
+}
+
+String? passwordCheck(String? password) {
+  if (!password!.contains(RegExp(r"[a-z]"))) {
+    return "Must contain atleast one lowercase letter";
+  }
+  if (!password.contains(RegExp(r"[A-Z]"))) {
+    return "Must contain atleast one uppercase letter";
+  }
+  if (!password.contains(RegExp(r"[0-9]"))) {
+    return "Must contain atleast one digit";
+  }
+  if (!password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+    return "Must contain atleast one special character";
+  }
+  return null;
 }
