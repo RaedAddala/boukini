@@ -1,0 +1,23 @@
+name: hotel_booking
+description: Hotel booking app with in-app payements.
+publish_to: 'none'
+version: 0.0.1+1
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_form_builder: ^9.1.0
+  form_builder_validators: ^9.0.0
+  get: ^4.6.5
+  retrofit: ^4.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
