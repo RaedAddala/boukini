@@ -86,14 +86,16 @@ class AuthenticationLayout extends StatelessWidget {
               form,
               gTinyVerSpace,
               Container(
-                width: double.infinity,
-                height: 50,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: gThemePrimaryColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 7.0),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: gThemePrimaryColor,
+                    minimumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
                   onPressed: () {
                     if (formKey.currentState != null &&
                         formKey.currentState!.validate()) {
