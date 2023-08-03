@@ -20,6 +20,9 @@ const EdgeInsetsGeometry gElementVerticalSmallPadding =
     EdgeInsets.symmetric(vertical: gelementSmallPadding);
 const EdgeInsetsGeometry gElementHorizantalSmallPadding =
     EdgeInsets.symmetric(horizontal: gelementSmallPadding);
+
+const EdgeInsetsGeometry gFormPadding =
+    EdgeInsets.symmetric(vertical: 12.0, horizontal: 9.0);
 /* 
   Theme Colors used:
 */
@@ -67,12 +70,12 @@ const TextStyle gButtonTextStyle = TextStyle(
   fontSize: gButtonTextSize,
   fontWeight: FontWeight.w500,
 );
-const double gTextSize = 14;
+const double gTextSize = 16;
 
 const TextStyle gTextStyle = TextStyle(
   color: gThemeOnSecondaryTextColor,
   fontSize: gTextSize,
-  fontWeight: FontWeight.w200,
+  fontWeight: FontWeight.w300,
 );
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
