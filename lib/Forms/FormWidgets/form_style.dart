@@ -4,18 +4,16 @@ import 'package:hotel_booking/utils/style.dart';
 const Color formFillColor = Color(0xfffefcfb);
 const Color formLabelTextColor = Color(0xff00b4d8);
 
-const double circularBorderValue = 20;
-const double borderSideWidth = 3.4;
-const BorderRadius borderRadius = BorderRadius.all(
-  Radius.circular(circularBorderValue),
-);
-
+const double circularBorderValue = 13.0;
+const double borderSideWidth = 3;
 const TextStyle labelStyle = TextStyle(
   color: gThemePrimaryColor,
-  fontSize: 20,
+  fontSize: 18,
 );
 const OutlineInputBorder formFocusedBorder = OutlineInputBorder(
-  borderRadius: borderRadius,
+  borderRadius: BorderRadius.all(
+    Radius.circular(circularBorderValue),
+  ),
   borderSide: BorderSide(
     width: borderSideWidth,
     color: gThemeFormColor,
@@ -23,7 +21,9 @@ const OutlineInputBorder formFocusedBorder = OutlineInputBorder(
   ),
 );
 const OutlineInputBorder formBorder = OutlineInputBorder(
-  borderRadius: borderRadius,
+  borderRadius: BorderRadius.all(
+    Radius.circular(circularBorderValue),
+  ),
   borderSide: BorderSide(
     width: borderSideWidth,
     strokeAlign: BorderSide.strokeAlignCenter,
