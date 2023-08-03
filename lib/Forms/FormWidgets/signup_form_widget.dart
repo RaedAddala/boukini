@@ -6,7 +6,7 @@ import 'package:hotel_booking/utils/forminput_formatters.dart';
 import 'package:hotel_booking/utils/spaces.dart';
 import 'package:hotel_booking/utils/style.dart';
 
-import 'form_style.dart';
+import '../FormStyles/form_style.dart';
 
 class SignUpForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
@@ -25,7 +25,7 @@ class SignUpFormState extends State<SignUpForm> {
     final TextEditingController confirmPass = TextEditingController();
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 7.0),
+      padding: gFormPadding,
       child: FormBuilder(
         key: formKey,
         child: Column(
