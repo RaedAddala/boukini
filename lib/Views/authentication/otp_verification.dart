@@ -52,14 +52,14 @@ class OTPverificationFormState extends State<OTPverificationForm> {
           Container(
             padding: gFormPadding,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 FormBuilder(
                   key: formKey,
                   child: Padding(
                     padding: gElementHorizantalSmallPadding,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding: gElementSmallPadding,
@@ -101,7 +101,7 @@ class OTPverificationFormState extends State<OTPverificationForm> {
                           )
                         : const Center(
                             child: Text(
-                              "Check Code",
+                              "Confirm",
                               style: gButtonTextStyle,
                             ),
                           ),

@@ -8,6 +8,7 @@ import '../../../../utils/spaces.dart';
 import '../../../../utils/theme.dart';
 import '../../controllers/page_controller.dart';
 import '../../styles/form_style.dart';
+
 class PasswordForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
   const PasswordForm({super.key, required this.formKey});
@@ -15,15 +16,16 @@ class PasswordForm extends StatefulWidget {
   State<PasswordForm> createState() => PasswordFormState();
 }
 
-class PasswordFormState extends State<PasswordForm>
-    with AutomaticKeepAliveClientMixin {
-  PasswordFormState();
+class PasswordFormState extends State<PasswordForm> {
   bool busy = false;
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     final formKey = widget.formKey;
     final FormPageController controller = Get.find();
+    
+
+
+
     return SingleChildScrollView(
       child: Container(
         padding: gWholePagePadding,
@@ -124,7 +126,4 @@ class PasswordFormState extends State<PasswordForm>
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

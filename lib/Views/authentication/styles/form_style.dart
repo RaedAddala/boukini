@@ -5,8 +5,8 @@ import '../../../utils/theme.dart';
 const Color formFillColor = Color(0xfffefcfb);
 const Color formLabelTextColor = Color(0xff00b4d8);
 
-const double circularBorderValue = 20;
-const double borderSideWidth = 3.4;
+const double circularBorderValue = 25;
+const double borderSideWidth = 3.5;
 const BorderRadius borderRadius = BorderRadius.all(
   Radius.circular(circularBorderValue),
 );

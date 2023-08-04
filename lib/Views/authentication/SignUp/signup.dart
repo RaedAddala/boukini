@@ -94,7 +94,9 @@ class _SignUpFormsState extends State<SignUpForms> {
                           formKey: otpformKey,
                           phoneNumber: Get.arguments["phone_number"],
                         ),
-                        CredentialForm(formKey: credentialsformkey),
+                        CredentialForm(
+                          formKey: credentialsformkey,
+                        ),
                         PasswordForm(formKey: passwordformkey),
                         TermsAndConditions(formKey: passwordformkey),
                       ],
@@ -109,65 +111,3 @@ class _SignUpFormsState extends State<SignUpForms> {
     );
   }
 }
-
-
-//  WillPopScope(
-//       child: Scaffold(
-//         body: SafeArea(
-//           child: SingleChildScrollView(
-//             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-//             child: Container(
-//               padding: gWholePagePadding,
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.start,
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     crossAxisAlignment: CrossAxisAlignment.center,
-//                     children: [
-//                       IconButton(
-//                         iconSize: gTitleTextSize * 1.4,
-//                         onPressed: () {
-//                           controller.prevPage();
-//                         },
-//                         icon: const Icon(
-//                           Icons.arrow_back,
-//                           color: gThemeOnSecondaryTextColor,
-//                         ),
-//                         padding: EdgeInsets.zero,
-//                         alignment: Alignment.centerLeft,
-//                       ),
-//                       const Padding(
-//                         padding: gElementHorizantalHugePadding,
-//                         child: Text(
-//                           "Sign Up",
-//                           style: gTitleTextStyle,
-//                           textAlign: TextAlign.start,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                   gHugeVerSpace,
-//                   SizedBox(
-//                     width: screenWidth(context),
-//                     height: screenHeight(context),
-//                     child: PageView(
-//                       physics: const NeverScrollableScrollPhysics(),
-//                       controller: pagecontroller,
-//                       children: <Widget>[
-//                         OTPverificationForm(formKey: otpformKey),
-//                         CredentialForm(formKey: credentialsformkey),
-//                         PasswordForm(formKey: passwordformkey),
-//                         TermsAndConditions(formKey: passwordformkey),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-  

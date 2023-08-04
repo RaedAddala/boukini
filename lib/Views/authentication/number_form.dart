@@ -92,7 +92,6 @@ class PhoneNumberFormState extends State<PhoneNumberForm> {
                                       Icons.phone_outlined,
                                       color: gThemePrimaryColor,
                                     ),
-                                    labelStyle: labelStyle,
                                   ),
                                   validator: FormBuilderValidators.compose(
                                     [
