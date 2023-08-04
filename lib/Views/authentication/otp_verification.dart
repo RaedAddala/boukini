@@ -33,102 +33,106 @@ class OTPverificationFormState extends State<OTPverificationForm> {
   Widget build(BuildContext context) {
     final formKey = widget.formKey;
     final FormPageController controller = Get.find();
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        gBigVerSpace,
-        const Text(
-          "Confirm Your Number ☎️",
-          style: gTitleTextStyle,
-        ),
-        gMidVerSpace,
-        Text(
-          "Enter the code we sent to the number XXXX-${widget.phoneNumber.substring(3)}",
-          style: gTextStyle,
-        ),
-        gMidVerSpace,
-        Container(
-          padding: gFormPadding,
-          child: Column(
-            children: [
-              FormBuilder(
-                key: formKey,
-                child: Padding(
-                  padding: gElementHorizantalSmallPadding,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: gElementSmallPadding,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            OtpInput(field1, true), // auto focus
-                            OtpInput(field2, false),
-                            OtpInput(field3, false),
-                            OtpInput(field4, false),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              gBigVerSpace,
-              Container(
-                padding: gElementSmallPadding,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: gThemePrimaryColor,
-                    minimumSize: const Size(double.infinity, 50),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: borderRadius,
-                    ),
-                  ),
-                  onPressed: () {
-                    if (formKey.currentState != null &&
-                        formKey.currentState!.validate()) controller.nextPage();
-                  },
-                  child: busy
-                      ? const CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation(Colors.white),
-                        )
-                      : const Center(
-                          child: Text(
-                            "Check Code",
-                            style: gButtonTextStyle,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          gBigVerSpace,
+          const Text(
+            "Confirm Your Number ☎️",
+            style: gTitleTextStyle,
+          ),
+          gMidVerSpace,
+          Text(
+            "Enter the code we sent to the number XXXX-${widget.phoneNumber.substring(3)}",
+            style: gTextStyle,
+          ),
+          gMidVerSpace,
+          Container(
+            padding: gFormPadding,
+            child: Column(
+              children: [
+                FormBuilder(
+                  key: formKey,
+                  child: Padding(
+                    padding: gElementHorizantalSmallPadding,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: gElementSmallPadding,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              OtpInput(field1, true), // auto focus
+                              OtpInput(field2, false),
+                              OtpInput(field3, false),
+                              OtpInput(field4, false),
+                            ],
                           ),
-                        ),
-                ),
-              ),
-              gMidVerSpace,
-              TextButton(
-                onPressed: () {
-                  Get.dialog(
-                    AlertDialog(
-                      title: const Text('Code'),
-                      content: const Text('Code was resend to you'),
-                      actions: [
-                        TextButton(
-                          child: const Text("Close"),
-                          onPressed: () => Get.back(),
                         ),
                       ],
                     ),
-                  );
-                },
-                child: const Text(
-                  "Send Code Again",
-                  style: gSecondaryTitleTextStyle,
+                  ),
                 ),
-              ),
-            ],
+                gBigVerSpace,
+                Container(
+                  padding: gElementSmallPadding,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: gThemePrimaryColor,
+                      minimumSize: const Size(double.infinity, 50),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: borderRadius,
+                      ),
+                    ),
+                    onPressed: () {
+                      if (formKey.currentState != null &&
+                          formKey.currentState!.validate()) {
+                        controller.nextPage();
+                      }
+                    },
+                    child: busy
+                        ? const CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                          )
+                        : const Center(
+                            child: Text(
+                              "Check Code",
+                              style: gButtonTextStyle,
+                            ),
+                          ),
+                  ),
+                ),
+                gHugeVerSpace,
+                TextButton(
+                  onPressed: () {
+                    Get.dialog(
+                      AlertDialog(
+                        title: const Text('Code'),
+                        content: const Text('Code was resend to you'),
+                        actions: [
+                          TextButton(
+                            child: const Text("Close"),
+                            onPressed: () => Get.back(),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    "Send Code Again",
+                    style: gSecondaryTitleTextStyle,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
