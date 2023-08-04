@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
         primaryColor: gThemePrimaryColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: Routes.first,
+      initialRoute: Routes.home,
       getPages: getPages,
     );
   }

@@ -18,7 +18,6 @@ class CredentialForm extends StatefulWidget {
 
 class CredentialFormState extends State<CredentialForm>
     with AutomaticKeepAliveClientMixin {
-  CredentialFormState();
   bool busy = false;
   @override
   Widget build(BuildContext context) {

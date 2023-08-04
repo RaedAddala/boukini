@@ -10,12 +10,14 @@ import '../otp_verification.dart';
 import 'Forms/enter_pass.dart';
 
 class LogInForms extends StatefulWidget {
-  const LogInForms({super.key});
+  final bool skipOtp;
+  const LogInForms({super.key, required this.skipOtp});
   @override
   State<LogInForms> createState() => _LogInFormsState();
 }
 
 class _LogInFormsState extends State<LogInForms> {
+  late final PageController pagecontroller;
   @override
   void dispose() {
     pagecontroller.dispose();
@@ -23,19 +25,22 @@ class _LogInFormsState extends State<LogInForms> {
     super.dispose();
   }
 
-  static const int _numberOfWidgets = 2;
-  final FormPageController controller =
-      Get.put(FormPageController(_numberOfWidgets));
-  late final pagecontroller = controller.pagecontroller;
-
   @override
   Widget build(BuildContext context) {
+    const int numberOfWidgets = 2;
+    final int initialPage = (widget.skipOtp) ? 1 : 0;
+    final FormPageController controller =
+        Get.put(FormPageController(numberOfWidgets, initialPage));
+    pagecontroller = controller.pagecontroller;
     final GlobalKey<FormBuilderState> otpformKey =
         GlobalKey<FormBuilderState>();
     final GlobalKey<FormBuilderState> verifyPasswordFormKey =
         GlobalKey<FormBuilderState>();
     return WillPopScope(
-      onWillPop: () => controller.prevPage(),
+      onWillPop: () {
+        controller.prevPage();
+        return Future<bool>.value(false);
+      },
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -84,7 +89,10 @@ class _LogInFormsState extends State<LogInForms> {
                     },
                     children: <Widget>[
                       /* ALL The Forms will be here */
-                      OTPverificationForm(formKey: otpformKey),
+                      OTPverificationForm(
+                        formKey: otpformKey,
+                        phoneNumber: Get.arguments["phone_number"],
+                      ),
                       VerifyPasswordForm(formKey: verifyPasswordFormKey),
                     ],
                   ),

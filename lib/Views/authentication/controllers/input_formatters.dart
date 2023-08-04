@@ -65,3 +65,22 @@ class CardMonthFilteringText extends TextInputFormatter {
     );
   }
 }
+
+class NewDigitReplaceOld extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.selection.baseOffset == 0) return newValue;
+    StringBuffer buff = StringBuffer();
+    if (newValue.text.length == 2) {
+      buff.write(newValue.text[1]);
+    } else {
+      buff.write(newValue.text[0]);
+    }
+    final s = buff.toString();
+    return newValue.copyWith(
+      text: s,
+      selection: TextSelection.collapsed(offset: s.length),
+    );
+  }
+}

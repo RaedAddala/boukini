@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,13 +5,17 @@ import '../../../config/routes.dart';
 
 class FormPageController extends GetxController {
   final int numberOfPages;
-  FormPageController(this.numberOfPages);
+  final int initialPage;
+  late final PageController pagecontroller;
   int currPage = 0;
-  final pagecontroller = PageController(
-    initialPage: 0,
-  );
-  nextPage() {
+  FormPageController(this.numberOfPages, this.initialPage) {
+    pagecontroller = PageController(
+      initialPage: initialPage,
+    );
+  }
+  void nextPage() {
     if (currPage == numberOfPages - 1) {
+      //Get.offAllNamed(Routes.dashboard);
     } else {
       pagecontroller.nextPage(
         duration: const Duration(milliseconds: 500),
@@ -23,7 +25,7 @@ class FormPageController extends GetxController {
     }
   }
 
-  prevPage() {
+  void prevPage() {
     if (currPage == 0) {
       Get.offAllNamed(Routes.phoneNumber);
     } else {

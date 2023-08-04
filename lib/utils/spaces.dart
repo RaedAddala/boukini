@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 const double gPagePadding = 10.0;
-const double gelementHugePadding = 13.0;
-const double gelementSmallPadding = 4.0;
+const double gelementHugePadding = 11.0;
+const double gelementSmallPadding = 5.0;
 
 const EdgeInsetsGeometry gVerticalWholePagePadding =
     EdgeInsets.symmetric(vertical: gPagePadding);

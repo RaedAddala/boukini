@@ -18,11 +18,9 @@ const Color gThemeOnSecondaryTextColor = Colors.black87;
 
 const Color gBodyTextColor = Color(0xff868686);
 
-
 /* 
   Theme Text Styles used:
 */
-
 
 const double gBodyTextSize = 12;
 
@@ -38,6 +36,13 @@ const TextStyle gTitleTextStyle = TextStyle(
   color: gThemeOnSecondaryTextColor,
   fontSize: gTitleTextSize,
   fontWeight: FontWeight.w900,
+);
+const double gTopScreenTextSize = 22;
+
+const TextStyle gTopScreenTextStyle = TextStyle(
+  color: gThemeOnSecondaryTextColor,
+  fontSize: gTopScreenTextSize,
+  fontWeight: FontWeight.w700,
 );
 
 const double gSecondaryTitleTextSize = 18;
@@ -56,7 +61,7 @@ const TextStyle gButtonTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
 );
 
-const double gTextSize = 16;
+const double gTextSize = 14;
 
 const TextStyle gTextStyle = TextStyle(
   color: gThemeOnSecondaryTextColor,

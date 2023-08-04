@@ -1,13 +1,12 @@
-import 'package:get/route_manager.dart';
-import 'package:hotel_booking/Views/first.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../Views/authentication/Login/login.dart';
 import '../Views/authentication/SignUp/signup.dart';
 import '../Views/authentication/number_form.dart';
 
-
 class Routes {
-  static String first = '/';
+  static String home = '/';
   static String phoneNumber = '/phoneNumber';
   static String signUp = '/signUp';
   static String logIn = '/logIn';
@@ -15,27 +14,51 @@ class Routes {
 
 final getPages = [
   GetPage(
+    name: Routes.home,
+    page: () {
+      return const Text("Welcome");
+    },
+    middlewares: [
+      RouteGuard(),
+    ],
+  ),
+  GetPage(
     name: Routes.phoneNumber,
     page: () {
       return PhoneNumberForm();
     },
+    transition: Transition.leftToRightWithFade,
+    transitionDuration: const Duration(milliseconds: 400),
+    curve: Curves.fastOutSlowIn,
   ),
   GetPage(
     name: Routes.signUp,
     page: () {
       return const SignUpForms();
     },
-  ),
-  GetPage(
-    name: Routes.first,
-    page: () {
-      return const FirstPage();
-    },
+    transition: Transition.leftToRightWithFade,
+    transitionDuration: const Duration(milliseconds: 400),
+    curve: Curves.fastOutSlowIn,
   ),
   GetPage(
     name: Routes.logIn,
     page: () {
-      return const LogInForms();
+      return const LogInForms(
+        skipOtp: false,
+      );
     },
+    transition: Transition.leftToRightWithFade,
+    transitionDuration: const Duration(milliseconds: 400),
+    curve: Curves.fastOutSlowIn,
   ),
 ];
+
+/* This will be managed in the future */
+dynamic userToken;
+
+class RouteGuard extends GetMiddleware {
+  @override
+  RouteSettings? redirect(String? route) {
+    return userToken == null ? RouteSettings(name: Routes.phoneNumber) : null;
+  }
+}
