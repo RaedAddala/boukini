@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/utils/style.dart';
+
+import '../../../utils/theme.dart';
 
 const Color formFillColor = Color(0xfffefcfb);
 const Color formLabelTextColor = Color(0xff00b4d8);

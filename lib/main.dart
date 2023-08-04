@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-import './utils/style.dart';
-import 'routes.dart';
+import './utils/theme.dart';
+import './config/routes.dart';
 
 void main() {
   runApp(const MainApp());
@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
         primaryColor: gThemePrimaryColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: Routes.phoneNumber,
+      initialRoute: Routes.first,
       getPages: getPages,
     );
   }

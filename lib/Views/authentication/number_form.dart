@@ -3,11 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/route_manager.dart';
-import 'package:hotel_booking/Forms/SignUp/signup.dart';
 import 'package:hotel_booking/utils/spaces.dart';
-import 'package:hotel_booking/utils/style.dart';
 
-import '../FormStyles/form_style.dart';
+import '../../utils/theme.dart';
+import 'SignUp/signup.dart';
+import 'styles/form_style.dart';
+
 
 class PhoneNumberForm extends StatefulWidget {
   final formKey = GlobalKey<FormBuilderState>();

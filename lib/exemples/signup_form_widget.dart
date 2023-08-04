@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:hotel_booking/utils/forminput_formatters.dart';
 import 'package:hotel_booking/utils/spaces.dart';
-import 'package:hotel_booking/utils/style.dart';
 
-import '../FormStyles/form_style.dart';
+import '../Views/authentication/controllers/input_formatters.dart';
+import '../Views/authentication/styles/form_style.dart';
+import '../utils/theme.dart';
+
 
 class SignUpForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;

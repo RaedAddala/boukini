@@ -1,10 +1,13 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking/routes.dart';
 
-class SignUpPageController extends GetxController {
+import '../../../config/routes.dart';
+
+class FormPageController extends GetxController {
   final int numberOfPages;
-  SignUpPageController(this.numberOfPages);
+  FormPageController(this.numberOfPages);
   int currPage = 0;
   final pagecontroller = PageController(
     initialPage: 0,

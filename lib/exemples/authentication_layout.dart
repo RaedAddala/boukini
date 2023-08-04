@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:hotel_booking/utils/spaces.dart';
-import 'package:hotel_booking/utils/style.dart';
+
+import '../utils/screen.dart';
+import '../utils/theme.dart';
 
 // Generic Widget used to build The forms Interfaces using widgets that define the forms
 class AuthenticationLayout extends StatelessWidget {

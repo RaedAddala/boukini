@@ -3,29 +3,28 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking/utils/spaces.dart';
-import 'package:hotel_booking/utils/style.dart';
 
-import '../../FormStyles/form_style.dart';
-import '../signup_controller.dart';
+import '../../../../utils/spaces.dart';
+import '../../../../utils/theme.dart';
+import '../../controllers/page_controller.dart';
+import '../../styles/form_style.dart';
 
-class PasswordForm extends StatefulWidget {
+class ForgetPasswordForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
-  const PasswordForm({super.key, required this.formKey});
+  const ForgetPasswordForm({super.key, required this.formKey});
   @override
-  State<PasswordForm> createState() => PasswordFormState();
+  State<ForgetPasswordForm> createState() => ForgetPasswordFormState();
 }
 
-class PasswordFormState extends State<PasswordForm>
+class ForgetPasswordFormState extends State<ForgetPasswordForm>
     with AutomaticKeepAliveClientMixin {
-  PasswordFormState();
+  ForgetPasswordFormState();
   bool busy = false;
   @override
   Widget build(BuildContext context) {
     super.build(context);
     final formKey = widget.formKey;
-    final SignUpPageController controller = Get.find();
-
+    final FormPageController controller = Get.find();
     return SingleChildScrollView(
       child: Container(
         padding: gWholePagePadding,
@@ -35,33 +34,6 @@ class PasswordFormState extends State<PasswordForm>
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  IconButton(
-                    iconSize: gTitleTextSize * 1.4,
-                    onPressed: () {
-                      controller.prevPage();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: gThemeOnSecondaryTextColor,
-                    ),
-                    padding: EdgeInsets.zero,
-                    alignment: Alignment.centerLeft,
-                  ),
-                  const Expanded(
-                    child: Padding(
-                      padding: gElementHorizantalHugePadding,
-                      child: Text(
-                        "Password",
-                        style: gTitleTextStyle,
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              gHugeVerSpace,
               const Text(
                 "Enter Your Phone Number☎️",
                 style: gTitleTextStyle,

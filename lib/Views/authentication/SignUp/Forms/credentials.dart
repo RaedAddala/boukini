@@ -3,27 +3,28 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking/utils/spaces.dart';
-import 'package:hotel_booking/utils/style.dart';
 
-import '../FormStyles/form_style.dart';
-import '../SignUp/signup_controller.dart';
+import '../../../../utils/spaces.dart';
+import '../../../../utils/theme.dart';
+import '../../controllers/page_controller.dart';
+import '../../styles/form_style.dart';
 
-class OTPForm extends StatefulWidget {
+class CredentialForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
-  const OTPForm({super.key, required this.formKey});
+  const CredentialForm({super.key, required this.formKey});
   @override
-  State<OTPForm> createState() => OTPFormState();
+  State<CredentialForm> createState() => CredentialFormState();
 }
 
-class OTPFormState extends State<OTPForm> with AutomaticKeepAliveClientMixin {
-  OTPFormState();
+class CredentialFormState extends State<CredentialForm>
+    with AutomaticKeepAliveClientMixin {
+  CredentialFormState();
   bool busy = false;
   @override
   Widget build(BuildContext context) {
     super.build(context);
     final formKey = widget.formKey;
-    final SignUpPageController controller = Get.find();
+    final FormPageController controller = Get.find();
     return SingleChildScrollView(
       child: Container(
         padding: gWholePagePadding,
@@ -33,33 +34,6 @@ class OTPFormState extends State<OTPForm> with AutomaticKeepAliveClientMixin {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  IconButton(
-                    iconSize: gTitleTextSize * 1.4,
-                    onPressed: () {
-                      controller.prevPage();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: gThemeOnSecondaryTextColor,
-                    ),
-                    padding: EdgeInsets.zero,
-                    alignment: Alignment.centerLeft,
-                  ),
-                  const Expanded(
-                    child: Padding(
-                      padding: gElementHorizantalHugePadding,
-                      child: Text(
-                        "OTP",
-                        style: gTitleTextStyle,
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              gHugeVerSpace,
               const Text(
                 "Enter Your Phone Number☎️",
                 style: gTitleTextStyle,
