@@ -79,9 +79,13 @@ class CredentialFormState extends State<CredentialForm> {
                               FormBuilderValidators.required(
                                 errorText: requiredMessage,
                               ),
-                              FormBuilderValidators.creditCard(
-                                errorText: 'Enter a valid credit card number',
+                              FormBuilderValidators.equalLength(
+                                19,
+                                errorText: "Must contain 16 digits",
                               ),
+                              // FormBuilderValidators.creditCard(
+                              //   errorText: 'Enter a valid credit card number',
+                              // ),
                             ],
                           ),
                           onTapOutside: (event) {

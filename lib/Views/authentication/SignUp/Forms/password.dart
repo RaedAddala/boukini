@@ -38,7 +38,8 @@ class PasswordFormState extends State<PasswordForm> {
           ),
           gMidVerSpace,
           const Text(
-            "Your Password must contain atleast: 8 characters, 1 uppercase letter, 1 lowercase letter, 1 digit, 1 special character",
+            '''Your Password must contain atleast:
+8 characters, 1 uppercase letter, 1 lowercase letter, 1 digit, 1 special character''',
             style: gTextStyle,
           ),
           gMidVerSpace,
@@ -97,6 +98,7 @@ class PasswordFormState extends State<PasswordForm> {
                             ),
                           ),
                         ),
+                        gHugeVerSpace,
                         const Padding(
                           padding: gElementHorizantalHugePadding,
                           child: Text(
