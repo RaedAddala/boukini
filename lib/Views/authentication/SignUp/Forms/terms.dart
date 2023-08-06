@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:hotel_booking/assets/terms_conditions.dart';
 
 import '../../../../utils/spaces.dart';
 import '../../../../utils/theme.dart';
@@ -16,116 +15,114 @@ class TermsAndConditions extends StatefulWidget {
   State<TermsAndConditions> createState() => TermsAndConditionsState();
 }
 
-class TermsAndConditionsState extends State<TermsAndConditions>
-    with AutomaticKeepAliveClientMixin {
-  TermsAndConditionsState();
+class TermsAndConditionsState extends State<TermsAndConditions> {
   bool busy = false;
+  bool agree = false;
+  bool scrolledtoEnd = false;
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     final formKey = widget.formKey;
     final FormPageController controller = Get.find();
-    return SingleChildScrollView(
-      child: Container(
-        padding: gWholePagePadding,
-        child: Padding(
-          padding: gElementHugePadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Enter Your Phone Number☎️",
-                style: gTitleTextStyle,
-              ),
-              gMidVerSpace,
-              const Text(
-                "We will send an OTP code to your number",
-                style: gTextStyle,
-              ),
-              gHugeVerSpace,
-              Container(
-                padding: gFormPadding,
-                child: Column(
-                  children: [
-                    FormBuilder(
-                      key: formKey,
-                      child: Padding(
-                        padding: gElementHorizantalSmallPadding,
-                        child: FormBuilderTextField(
-                          name: "phone_number",
-                          onTapOutside: (event) {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                          },
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            LengthLimitingTextInputFormatter(8),
-                          ],
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: const InputDecoration(
-                            filled: true,
-                            fillColor: formFillColor,
-                            border: formBorder,
-                            focusedBorder: formFocusedBorder,
-                            label: Text("Phone Number"),
-                            prefixIcon: Icon(
-                              Icons.phone_outlined,
-                              color: gThemePrimaryColor,
-                            ),
-                            labelStyle: labelStyle,
-                          ),
-                          validator: FormBuilderValidators.compose(
-                            [
-                              FormBuilderValidators.required(
-                                errorText: "Field can't be empty",
-                              ),
-                              FormBuilderValidators.equalLength(
-                                8,
-                                errorText: 'Must be 8 digits',
-                              ),
-                            ],
-                          ),
-                        ),
+    final scrollController = ScrollController();
+    scrollController.addListener(() {
+      if (scrollController.offset >=
+              scrollController.position.maxScrollExtent &&
+          !scrollController.position.outOfRange) {
+        setState(() {
+          scrolledtoEnd = true;
+        });
+      }
+    });
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Terms And Conditions",
+          style: gTitleTextStyle,
+        ),
+        gMidVerSpace,
+        const Text(
+          "Please read the terms and conditions of the app.",
+          style: gTextStyle,
+        ),
+        gMidVerSpace,
+        Expanded(
+          child: Container(
+            padding: gFormPadding,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: gElementHorizantalSmallPadding,
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        children: [
+                          const Text(termsAndConditions),
+                        ],
                       ),
                     ),
-                    gMidVerSpace,
-                    Container(
-                      padding: gFormPadding,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: gThemePrimaryColor,
-                          minimumSize: const Size(double.infinity, 50),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: borderRadius,
-                          ),
-                        ),
-                        onPressed: () {
-                          controller.nextPage();
-                        },
-                        child: busy
-                            ? const CircularProgressIndicator(
-                                valueColor:
-                                    AlwaysStoppedAnimation(Colors.white),
-                              )
-                            : const Center(
-                                child: Text(
-                                  "Send OTP",
-                                  style: gButtonTextStyle,
-                                ),
-                              ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              )
-            ],
+                Container(
+                  child: Column(
+                    children: [
+                      FormBuilderCheckbox(
+                        enabled: scrolledtoEnd,
+                        name: "accept",
+                        initialValue: agree,
+                        onChanged: (value) {
+                          setState(
+                            () {
+                              agree = value ?? false;
+                            },
+                          );
+                        },
+                        title: const Text(
+                          "I have read and accept terms and conditions",
+                          style: gSecondaryTitleTextStyle,
+                        ),
+                      ),
+                      Container(
+                        padding: gElementSmallPadding,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: gThemePrimaryColor,
+                            minimumSize: const Size(double.infinity, 50),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: borderRadius,
+                            ),
+                          ),
+                          onPressed: agree
+                              ? () {
+                                  controller.nextPage();
+                                }
+                              : null,
+                          child: busy
+                              ? const CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.white),
+                                )
+                              : const Center(
+                                  child: Text(
+                                    "Validate",
+                                    style: gButtonTextStyle,
+                                  ),
+                                ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

@@ -45,7 +45,7 @@ const TextStyle gTopScreenTextStyle = TextStyle(
   fontWeight: FontWeight.w700,
 );
 
-const double gSecondaryTitleTextSize = 18;
+const double gSecondaryTitleTextSize = 16;
 
 const TextStyle gSecondaryTitleTextStyle = TextStyle(
   color: gThemeOnSecondaryTextColor,
