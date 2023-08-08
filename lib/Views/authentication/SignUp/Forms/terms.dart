@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking/assets/terms_conditions.dart';
+import 'package:hotel_booking/utils/material_theme.dart';
+import 'package:hotel_booking/utils/spaces.dart';
+import 'package:hotel_booking/utils/theme.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
-import '../../../../utils/spaces.dart';
-import '../../../../utils/theme.dart';
 import '../../controllers/page_controller.dart';
-import '../../styles/form_style.dart';
 
 class TermsAndConditions extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
@@ -19,6 +19,13 @@ class TermsAndConditionsState extends State<TermsAndConditions> {
   bool busy = false;
   bool agree = false;
   bool scrolledtoEnd = false;
+  String? termsAndConditions;
+  @override
+  Future<void> initState() async {
+    super.initState();
+    termsAndConditions = await loadAsset();
+  }
+
   @override
   Widget build(BuildContext context) {
     final FormPageController controller = Get.find();
@@ -59,9 +66,14 @@ class TermsAndConditionsState extends State<TermsAndConditions> {
                     child: SingleChildScrollView(
                       controller: scrollController,
                       scrollDirection: Axis.vertical,
-                      child: const Column(
+                      child: Column(
                         children: [
-                          Text(termsAndConditions),
+                          termsAndConditions != null
+                              ? Text(termsAndConditions!)
+                              : const CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.white),
+                                ),
                         ],
                       ),
                     ),
@@ -122,4 +134,8 @@ class TermsAndConditionsState extends State<TermsAndConditions> {
       ],
     );
   }
+}
+
+Future<String> loadAsset() async {
+  return await rootBundle.loadString('assets/terms_conditions.txt');
 }

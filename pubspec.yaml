@@ -32,18 +32,10 @@ flutter_native_splash:
     image_dark: assets/images/logo.jpg
     icon_background_color:  "#003554"
     icon_background_color_dark: "#003554"
-  # android: true
-  # ios: true
+
 
 flutter:
   uses-material-design: true
-  # fonts:
-  #   - family: Nunito
-  #     fonts:
-  #       - asset: assets\fonts\Nunito-Regular.ttf
-  #       - asset: assets\fonts\Nunito-Medium.ttf
-  #         weight: 500
-  #       - asset: assets\fonts\Nunito-Bold.ttf
-  #         weight: 700
-  #       - asset: assets\fonts\Nunito-Light.ttf
-  #         weight: 300
+  assets:
+    - assets/strings/terms_conditions.txt
+    - assets/google_fonts/
