@@ -21,7 +21,6 @@ class TermsAndConditionsState extends State<TermsAndConditions> {
   bool scrolledtoEnd = false;
   @override
   Widget build(BuildContext context) {
-    final formKey = widget.formKey;
     final FormPageController controller = Get.find();
     final scrollController = ScrollController();
     scrollController.addListener(() {
@@ -60,63 +59,61 @@ class TermsAndConditionsState extends State<TermsAndConditions> {
                     child: SingleChildScrollView(
                       controller: scrollController,
                       scrollDirection: Axis.vertical,
-                      child: Column(
+                      child: const Column(
                         children: [
-                          const Text(termsAndConditions),
+                          Text(termsAndConditions),
                         ],
                       ),
                     ),
                   ),
                 ),
-                Container(
-                  child: Column(
-                    children: [
-                      FormBuilderCheckbox(
-                        enabled: scrolledtoEnd,
-                        name: "accept",
-                        initialValue: agree,
-                        onChanged: (value) {
-                          setState(
-                            () {
-                              agree = value ?? false;
-                            },
-                          );
-                        },
-                        title: const Text(
-                          "I have read and accept terms and conditions",
-                          style: gSecondaryTitleTextStyle,
-                        ),
+                Column(
+                  children: [
+                    FormBuilderCheckbox(
+                      enabled: scrolledtoEnd,
+                      name: "accept",
+                      initialValue: agree,
+                      onChanged: (value) {
+                        setState(
+                          () {
+                            agree = value ?? false;
+                          },
+                        );
+                      },
+                      title: const Text(
+                        "I have read and accept terms and conditions",
+                        style: gSecondaryTitleTextStyle,
                       ),
-                      Container(
-                        padding: gElementSmallPadding,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: gThemePrimaryColor,
-                            minimumSize: const Size(double.infinity, 50),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: borderRadius,
-                            ),
+                    ),
+                    Container(
+                      padding: gElementSmallPadding,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: gThemePrimaryColor,
+                          minimumSize: const Size(double.infinity, 50),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: borderRadius,
                           ),
-                          onPressed: agree
-                              ? () {
-                                  controller.nextPage();
-                                }
-                              : null,
-                          child: busy
-                              ? const CircularProgressIndicator(
-                                  valueColor:
-                                      AlwaysStoppedAnimation(Colors.white),
-                                )
-                              : const Center(
-                                  child: Text(
-                                    "Validate",
-                                    style: gButtonTextStyle,
-                                  ),
-                                ),
                         ),
+                        onPressed: agree
+                            ? () {
+                                controller.nextPage();
+                              }
+                            : null,
+                        child: busy
+                            ? const CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation(Colors.white),
+                              )
+                            : const Center(
+                                child: Text(
+                                  "Validate",
+                                  style: gButtonTextStyle,
+                                ),
+                              ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

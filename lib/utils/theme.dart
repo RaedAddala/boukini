@@ -1,16 +1,9 @@
-/* 
-  Theme Colors used:
-*/
-// Form Color
 import 'package:flutter/material.dart';
 
-const Color gThemeFormColor = Color(0xff0096c7);
-
-// Buttons Color:
+const Color gThemeFormColor = Color(0xff0077b6);
 const Color gThemePrimaryColor = Color(0xff0077b6);
+const Color gThemeSecondartyColor = Color(0xfff7f6f1);
 
-// Background Color
-const Color gThemeSecondartyColor = Color(0xfff8f7ff);
 // Text on buttons
 const Color gThemeOnPrimaryTextColor = Colors.white;
 // Text everywhere else buttons except for small text

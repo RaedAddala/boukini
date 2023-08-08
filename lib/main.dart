@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/route_manager.dart';
 
-import './utils/theme.dart';
 import './config/routes.dart';
+import 'utils/material_theme.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MainApp());
 }
 
@@ -13,13 +16,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: gThemePrimaryColor,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      initialRoute: Routes.home,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      initialRoute: Routes.dashboard,
       getPages: getPages,
     );
   }

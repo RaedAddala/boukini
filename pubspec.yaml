@@ -10,8 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_form_builder: ^9.1.0
+  flutter_native_splash: ^2.3.1
   form_builder_validators: ^9.0.0
   get: ^4.6.5
+  google_fonts: ^5.1.0
   retrofit: ^4.0.1
 
 dev_dependencies:
@@ -19,5 +21,29 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
 
+flutter_native_splash:
+  color:  "#003554"
+  color_dark: "#003554"
+  image:  assets/images/logo.jpg
+  image_dark: assets/images/logo.jpg
+  web:  false
+  android_12: 
+    image:  assets/images/logo.jpg
+    image_dark: assets/images/logo.jpg
+    icon_background_color:  "#003554"
+    icon_background_color_dark: "#003554"
+  # android: true
+  # ios: true
+
 flutter:
   uses-material-design: true
+  # fonts:
+  #   - family: Nunito
+  #     fonts:
+  #       - asset: assets\fonts\Nunito-Regular.ttf
+  #       - asset: assets\fonts\Nunito-Medium.ttf
+  #         weight: 500
+  #       - asset: assets\fonts\Nunito-Bold.ttf
+  #         weight: 700
+  #       - asset: assets\fonts\Nunito-Light.ttf
+  #         weight: 300

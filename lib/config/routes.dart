@@ -4,15 +4,26 @@ import 'package:get/get.dart';
 import '../Views/authentication/Login/login.dart';
 import '../Views/authentication/SignUp/signup.dart';
 import '../Views/authentication/number_form.dart';
+import '../Views/dashboard/dashboard.dart';
 
 class Routes {
   static String home = '/';
   static String phoneNumber = '/phoneNumber';
   static String signUp = '/signUp';
   static String logIn = '/logIn';
+  static String dashboard = '/dashboard';
 }
 
 final getPages = [
+  GetPage(
+    name: Routes.dashboard,
+    page: () {
+      return const Dashboard();
+    },
+    transition: Transition.leftToRightWithFade,
+    transitionDuration: const Duration(milliseconds: 400),
+    curve: Curves.fastOutSlowIn,
+  ),
   GetPage(
     name: Routes.home,
     page: () {
