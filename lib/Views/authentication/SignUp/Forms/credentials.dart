@@ -4,9 +4,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking/Views/authentication/controllers/page_controller.dart';
-import 'package:hotel_booking/Views/authentication/styles/form_style.dart';
 import 'package:hotel_booking/utils/spaces.dart';
 import 'package:hotel_booking/utils/theme.dart';
+import '../../../../utils/material_theme.dart';
 
 import '../../controllers/input_formatters.dart';
 
@@ -91,12 +91,12 @@ class CredentialFormState extends State<CredentialForm> {
                           onTapOutside: (event) {
                             FocusManager.instance.primaryFocus?.unfocus();
                           },
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             filled: true,
                             fillColor: formFillColor,
                             border: formBorder,
                             focusedBorder: formFocusedBorder,
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               Icons.credit_card_outlined,
                               color: gThemePrimaryColor,
                             ),
@@ -134,12 +134,12 @@ class CredentialFormState extends State<CredentialForm> {
                                     ],
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       filled: true,
                                       fillColor: formFillColor,
                                       border: formBorder,
                                       focusedBorder: formFocusedBorder,
-                                      prefixIcon: Icon(
+                                      prefixIcon: const Icon(
                                         Icons.perm_identity_outlined,
                                         color: gThemePrimaryColor,
                                       ),
@@ -198,12 +198,12 @@ class CredentialFormState extends State<CredentialForm> {
                                     ],
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       filled: true,
                                       fillColor: formFillColor,
                                       border: formBorder,
                                       focusedBorder: formFocusedBorder,
-                                      prefixIcon: Icon(
+                                      prefixIcon: const Icon(
                                         Icons.calendar_month_outlined,
                                         color: gThemePrimaryColor,
                                       ),

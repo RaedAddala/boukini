@@ -2,7 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'dart:math';
 
-const double circularBorderValue = 25;
+const double circularBorderValue = 12;
+const double borderSideWidth = 1;
+const formFillColor = Color(0xffc1121f);
+final OutlineInputBorder formFocusedBorder = OutlineInputBorder(
+  borderRadius: borderRadius,
+  borderSide: BorderSide(
+    width: borderSideWidth,
+    color: AppTheme.lightTheme.colorScheme.secondary,
+    strokeAlign: BorderSide.strokeAlignCenter,
+  ),
+);
+const OutlineInputBorder formBorder = OutlineInputBorder(
+  borderRadius: borderRadius,
+  borderSide: BorderSide(
+    width: borderSideWidth,
+    strokeAlign: BorderSide.strokeAlignCenter,
+  ),
+);
 
 const BorderRadius borderRadius = BorderRadius.all(
   Radius.circular(circularBorderValue),
@@ -13,12 +30,12 @@ abstract class AppTheme {
     visualDensity: VisualDensity.compact,
     //primarySwatch: _materialColor,
     useMaterial3: true,
-    colorSchemeSeed: const Color(0xff38aecc),
+    colorSchemeSeed: const Color(0xff007ea7),
     typography: Typography.material2021(),
     // typography: Typography.material2018(),
     brightness: Brightness.light,
-    fontFamily: GoogleFonts.lekton().fontFamily,
-    textTheme: GoogleFonts.lektonTextTheme(),
+    textTheme:
+        GoogleFonts.montserratTextTheme().merge(GoogleFonts.lektonTextTheme()),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -70,12 +87,13 @@ abstract class AppTheme {
     visualDensity: VisualDensity.compact,
     //primarySwatch: _materialColor,
     useMaterial3: true,
-    colorSchemeSeed: const Color(0xff38aecc),
+    colorSchemeSeed: const Color(0xff007ea7),
     typography: Typography.material2021(colorScheme: const ColorScheme.dark()),
     // typography: Typography.material2018(),
     brightness: Brightness.dark,
-    fontFamily: GoogleFonts.lekton().fontFamily,
-    textTheme: GoogleFonts.lektonTextTheme(),
+    textTheme:
+        GoogleFonts.montserratTextTheme().merge(GoogleFonts.lektonTextTheme()),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(

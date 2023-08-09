@@ -13,8 +13,13 @@ void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   LicenseRegistry.addLicense(() async* {
-    final license = await rootBundle.loadString('google_fonts/OFL.txt');
-    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+    final lektonlicense =
+        await rootBundle.loadString('google_fonts/LektonOFL.txt');
+    final montasseratlicense =
+        await rootBundle.loadString('google_fonts/MontserratOFL.txt');
+
+    yield LicenseEntryWithLineBreaks(['google_fonts'], lektonlicense);
+    yield LicenseEntryWithLineBreaks(['google_fonts'], montasseratlicense);
   });
   runApp(const MainApp());
 }

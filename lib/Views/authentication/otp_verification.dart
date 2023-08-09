@@ -8,7 +8,7 @@ import '../../utils/spaces.dart';
 import '../../utils/theme.dart';
 import 'controllers/input_formatters.dart';
 import 'controllers/page_controller.dart';
-import 'styles/form_style.dart';
+import '../../utils/material_theme.dart';
 
 class OTPverificationForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
@@ -158,7 +158,7 @@ class OtpInput extends StatelessWidget {
           NewDigitReplaceOld(),
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           filled: true,
           fillColor: formFillColor,
           border: formBorder,

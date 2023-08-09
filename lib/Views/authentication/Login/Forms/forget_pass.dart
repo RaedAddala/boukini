@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../../../../utils/spaces.dart';
 import '../../../../utils/theme.dart';
 import '../../controllers/page_controller.dart';
-import '../../styles/form_style.dart';
+import '../../../../utils/material_theme.dart';
 
 class ForgetPasswordForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
@@ -63,17 +63,16 @@ class ForgetPasswordFormState extends State<ForgetPasswordForm>
                             LengthLimitingTextInputFormatter(8),
                           ],
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             filled: true,
                             fillColor: formFillColor,
                             border: formBorder,
                             focusedBorder: formFocusedBorder,
-                            label: Text("Phone Number"),
-                            prefixIcon: Icon(
+                            label: const Text("Phone Number"),
+                            prefixIcon: const Icon(
                               Icons.phone_outlined,
                               color: gThemePrimaryColor,
                             ),
-                            labelStyle: labelStyle,
                           ),
                           validator: FormBuilderValidators.compose(
                             [

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../../../../utils/spaces.dart';
 import '../../../../utils/theme.dart';
 import '../../controllers/page_controller.dart';
-import '../../styles/form_style.dart';
+import '../../../../utils/material_theme.dart';
 
 class PasswordForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
@@ -85,14 +85,14 @@ class PasswordFormState extends State<PasswordForm> {
                             ],
                           ),
                           controller: pass,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             filled: true,
                             fillColor: formFillColor,
                             border: formBorder,
                             focusedBorder: formFocusedBorder,
                             hintText: "Enter New Password",
                             hintStyle: gBodyTextStyle,
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               Icons.lock_outlined,
                               color: gThemePrimaryColor,
                             ),
@@ -123,14 +123,14 @@ class PasswordFormState extends State<PasswordForm> {
                               passwordCheck,
                             ],
                           ),
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             filled: true,
                             fillColor: formFillColor,
                             border: formBorder,
                             focusedBorder: formFocusedBorder,
                             hintText: "Re-Enter New Password",
                             hintStyle: gBodyTextStyle,
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               Icons.lock_outlined,
                               color: gThemePrimaryColor,
                             ),

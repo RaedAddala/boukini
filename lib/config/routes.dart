@@ -36,7 +36,7 @@ final getPages = [
   GetPage(
     name: Routes.phoneNumber,
     page: () {
-      return PhoneNumberForm();
+      return const PhoneNumberForm();
     },
     transition: Transition.leftToRightWithFade,
     transitionDuration: const Duration(milliseconds: 400),

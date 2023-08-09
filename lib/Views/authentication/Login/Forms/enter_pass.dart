@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:hotel_booking/utils/material_theme.dart';
 
 import '../../../../utils/spaces.dart';
 import '../../../../utils/theme.dart';
 import '../../controllers/page_controller.dart';
-import '../../styles/form_style.dart';
 
 class VerifyPasswordForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
@@ -63,17 +63,16 @@ class VerifyPasswordFormState extends State<VerifyPasswordForm>
                             LengthLimitingTextInputFormatter(8),
                           ],
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             filled: true,
                             fillColor: formFillColor,
                             border: formBorder,
                             focusedBorder: formFocusedBorder,
-                            label: Text("Phone Number"),
-                            prefixIcon: Icon(
+                            label: const Text("Phone Number"),
+                            prefixIcon: const Icon(
                               Icons.phone_outlined,
                               color: gThemePrimaryColor,
                             ),
-                            labelStyle: labelStyle,
                           ),
                           validator: FormBuilderValidators.compose(
                             [
