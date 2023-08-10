@@ -9,8 +9,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../../controllers/page_controller.dart';
 
 class TermsAndConditions extends StatefulWidget {
-  final GlobalKey<FormBuilderState> formKey;
-  const TermsAndConditions({super.key, required this.formKey});
+  const TermsAndConditions({super.key});
   @override
   State<TermsAndConditions> createState() => TermsAndConditionsState();
 }

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 const double circularBorderValue = 12;
 const double borderSideWidth = 1;
-const formFillColor = Color(0xffc1121f);
+const formFillColor = Color(0xff0496ff);
 final OutlineInputBorder formFocusedBorder = OutlineInputBorder(
   borderRadius: borderRadius,
   borderSide: BorderSide(
@@ -27,15 +27,13 @@ const BorderRadius borderRadius = BorderRadius.all(
 
 abstract class AppTheme {
   static ThemeData lightTheme = ThemeData(
-    visualDensity: VisualDensity.compact,
-    //primarySwatch: _materialColor,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
     useMaterial3: true,
-    colorSchemeSeed: const Color(0xff007ea7),
+    colorSchemeSeed: const Color(0xff0496ff),
     typography: Typography.material2021(),
-    // typography: Typography.material2018(),
     brightness: Brightness.light,
     textTheme:
-        GoogleFonts.montserratTextTheme().merge(GoogleFonts.lektonTextTheme()),
+        GoogleFonts.comfortaaTextTheme().merge(GoogleFonts.alegreyaTextTheme()),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -84,16 +82,13 @@ abstract class AppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
-    visualDensity: VisualDensity.compact,
-    //primarySwatch: _materialColor,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
     useMaterial3: true,
-    colorSchemeSeed: const Color(0xff007ea7),
+    colorSchemeSeed: const Color(0xff00b4d8),
     typography: Typography.material2021(colorScheme: const ColorScheme.dark()),
-    // typography: Typography.material2018(),
     brightness: Brightness.dark,
     textTheme:
-        GoogleFonts.montserratTextTheme().merge(GoogleFonts.lektonTextTheme()),
-
+        GoogleFonts.comfortaaTextTheme().merge(GoogleFonts.alegreyaTextTheme()),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(

@@ -7,6 +7,7 @@ import 'package:hotel_booking/utils/screen.dart';
 
 import 'Login/login.dart';
 import 'SignUp/signup.dart';
+import 'controllers/form_colors_controller.dart';
 
 class PhoneNumberForm extends StatefulWidget {
   const PhoneNumberForm({super.key});
@@ -23,53 +24,111 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
   @override
   void dispose() {
     _myController.dispose();
+    Get.delete<GlobalFormThemeVarController>();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 4,
-        shadowColor: Theme.of(context).shadowColor,
-        backgroundColor: (ThemeMode.system == ThemeMode.light)
-            ? Theme.of(context).primaryColorLight
-            : Theme.of(context).primaryColorDark,
-        centerTitle: true,
-        title: Text(
-          "Connect",
-          style: Theme.of(context)
+    GlobalFormThemeVarController globals = Get.put(
+        GlobalFormThemeVarController(
+          appBarShadowColor: Theme.of(context).shadowColor,
+          appBarTitleStyle: Theme.of(context)
               .textTheme
               .headlineLarge!
               .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+          appBarElementsColor: Theme.of(context).colorScheme.onPrimary,
+          appBarbackgroundColor: Theme.of(context).colorScheme.primary,
+          scaffoldbackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        ),
+        permanent: true);
+
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 4,
+        shadowColor: globals.appBarShadowColor,
+        backgroundColor: globals.appBarbackgroundColor,
+        centerTitle: true,
+        title: Text(
+          "Connect",
+          style: globals.appBarTitleStyle,
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
-            color: Theme.of(context).scaffoldBackgroundColor,
-            height: screenHeightPercentage(context, percentage: 0.9),
+            padding: const EdgeInsets.all(12),
+            color: globals.scaffoldbackgroundColor,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
-                  child: Text(
-                    "Enter Your Phone Number",
-                    style: Theme.of(context).textTheme.headlineSmall,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 10.0),
+                  child: Center(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          border: Border(bottom: BorderSide(width: 0.5))),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/Logo.png',
+                            filterQuality: FilterQuality.high,
+                            fit: BoxFit.scaleDown,
+                            width: 26,
+                            height: 26,
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          Text(
+                            "Boukini",
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall!
+                                .copyWith(
+                                    color: Theme.of(context).primaryColor),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 14,
                 ),
-                Text(
-                  "We will send an OTP code to your phone.\n",
-                  style: Theme.of(context).textTheme.bodyMedium,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Enter Your Phone Number",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "We will send an OTP code to your phone.\n",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +144,7 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             const SizedBox(
-                              height: 8,
+                              height: 3,
                             ),
                             FormBuilderTextField(
                               name: "phone_number",
@@ -123,11 +182,11 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
+                          minimumSize: const Size(double.infinity, 40),
                         ),
                         onPressed: () {
                           if (_formKey.currentState != null &&
@@ -159,39 +218,10 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
                             : const Center(
                                 child: Text(
                                   "Validate",
-                                  style: TextStyle(fontSize: 26),
                                 ),
                               ),
                       ),
                     ],
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          'assets/images/Logo.png',
-                          filterQuality: FilterQuality.high,
-                          fit: BoxFit.scaleDown,
-                          width: 60,
-                          height: 50,
-                        ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Text(
-                          "Boukini",
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge!
-                              .copyWith(color: Theme.of(context).primaryColor),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               ],

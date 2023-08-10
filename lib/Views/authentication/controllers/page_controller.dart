@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../config/routes.dart';
+import 'package:hotel_booking/config/routes.dart';
 
 class FormPageController extends GetxController {
   final int numberOfPages;
