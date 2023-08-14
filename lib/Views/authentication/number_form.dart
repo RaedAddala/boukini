@@ -3,11 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking/utils/screen.dart';
 
 import 'Login/login.dart';
 import 'SignUp/signup.dart';
-import 'controllers/form_colors_controller.dart';
+import '../controllers/form_colors_controller.dart';
 
 class PhoneNumberForm extends StatefulWidget {
   const PhoneNumberForm({super.key});

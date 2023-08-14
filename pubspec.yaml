@@ -14,6 +14,7 @@ dependencies:
   form_builder_validators: ^9.0.0
   get: ^4.6.5
   google_fonts: ^5.1.0
+  google_nav_bar: ^5.0.6
   retrofit: ^4.0.1
 
 dev_dependencies:

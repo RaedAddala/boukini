@@ -3,7 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking/utils/screen.dart';
 
-import '../controllers/form_colors_controller.dart';
+import '../../controllers/form_colors_controller.dart';
 import '../controllers/page_controller.dart';
 import '../otp_verification.dart';
 import 'Forms/credentials.dart';

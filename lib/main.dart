@@ -31,12 +31,15 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
     return GetMaterialApp(
+      builder: (context, child) {
+        return Directionality(textDirection: TextDirection.ltr, child: child!);
+      },
       title: "Boukini",
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      initialRoute: Routes.home,
+      initialRoute: Routes.mainScreen,
       getPages: getPages,
     );
   }

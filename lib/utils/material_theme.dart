@@ -26,6 +26,7 @@ const BorderRadius borderRadius = BorderRadius.all(
 );
 
 abstract class AppTheme {
+  static const _elevation = MaterialStatePropertyAll<double>(2);
   static ThemeData lightTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     useMaterial3: true,
@@ -41,6 +42,7 @@ abstract class AppTheme {
             borderRadius: borderRadius,
           ),
         ),
+        elevation: _elevation,
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(
@@ -96,6 +98,7 @@ abstract class AppTheme {
             borderRadius: borderRadius,
           ),
         ),
+        elevation: _elevation,
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(

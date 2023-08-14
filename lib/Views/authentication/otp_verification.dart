@@ -147,7 +147,6 @@ class _OTPverificationFormState extends State<OTPverificationForm> {
     );
   }
 }
-
 class OtpInput extends StatelessWidget {
   final TextEditingController controller;
   final bool autoFocus;

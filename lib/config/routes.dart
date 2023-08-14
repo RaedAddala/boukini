@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Views/screens/main_screen.dart';
 import '../Views/authentication/Login/login.dart';
 import '../Views/authentication/SignUp/signup.dart';
 import '../Views/authentication/number_form.dart';
-import '../Views/dashboard/dashboard.dart';
 
 class Routes {
   static String home = '/';
   static String phoneNumber = '/phoneNumber';
   static String signUp = '/signUp';
   static String logIn = '/logIn';
-  static String dashboard = '/dashboard';
+  static String mainScreen = '/mainScreen';
 }
 
 final getPages = [
   GetPage(
-    name: Routes.dashboard,
+    name: Routes.mainScreen,
     page: () {
-      return const Dashboard();
+      return const MainScreen();
     },
     transition: Transition.leftToRightWithFade,
     transitionDuration: const Duration(milliseconds: 400),
