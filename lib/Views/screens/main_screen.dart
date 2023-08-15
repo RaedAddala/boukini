@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
+
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:hotel_booking/env/env.dart';
+import 'package:hotel_booking/repository/Places/places_repository.dart';
 import 'package:intl/intl.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -385,57 +389,92 @@ class _MainScreenState extends State<MainScreen> {
                                   const SizedBox(
                                     height: 2,
                                   ),
-                                  FormBuilderTextField(
-                                    name: "location",
-                                    onTapOutside: (event) {
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus();
-                                    },
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    style:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    decoration: InputDecoration(
-                                      isDense: true,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 10),
-                                      errorMaxLines: 1,
-                                      errorStyle: const TextStyle(
-                                        fontSize: 0,
+                                  FormBuilderTypeAhead<String>(
+                                      name: "location",
+                                      itemBuilder: (context, location) {
+                                        return ListTile(title: Text(location));
+                                      },
+                                      suggestionsCallback: (pattern) async {
+                                        if (pattern.isNotEmpty &&
+                                            pattern.length > 4) {
+                                          var places = await PlaceRepository
+                                              .client
+                                              .getSuggestions(
+                                                  pattern, Env.geoApifyKey);
+                                          return places.map((e) {
+                                            StringBuffer buf = StringBuffer();
+                                            if (e.name != null)
+                                              buf.write(e.name);
+                                            if (e.district != null) {
+                                              if (buf.isNotEmpty) {
+                                                buf.write(" , ");
+                                              }
+                                              buf.write(e.district);
+                                            }
+                                            if (e.city != null) {
+                                              if (buf.isNotEmpty) {
+                                                buf.write(" , ");
+                                              }
+                                              buf.write(e.city);
+                                            }
+                                            if (e.state != null) {
+                                              if (buf.isNotEmpty) {
+                                                buf.write(" , ");
+                                              }
+                                              buf.write(e.state);
+                                            }
+
+                                            buf.write(" , ");
+                                            buf.write(e.country);
+                                            return buf.toString();
+                                          });
+                                        }
+                                        return <String>[];
+                                      },
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 10),
+                                        errorMaxLines: 1,
+                                        filled: true,
+                                        fillColor: formFillColor,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Theme.of(context)
+                                                  .primaryColorLight,
+                                              width: 2.0,
+                                              strokeAlign:
+                                                  BorderSide.strokeAlignInside),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(100.0)),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Theme.of(context)
+                                                  .primaryColorDark,
+                                              width: 3.0,
+                                              strokeAlign:
+                                                  BorderSide.strokeAlignInside),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(100.0)),
+                                        ),
+                                        border: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100.0)),
+                                        ),
+                                        prefixIcon: const Icon(
+                                          Icons.location_on_outlined,
+                                        ),
                                       ),
-                                      filled: true,
-                                      fillColor: formFillColor,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Theme.of(context)
-                                                .primaryColorLight,
-                                            width: 2.0,
-                                            strokeAlign:
-                                                BorderSide.strokeAlignInside),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(100.0)),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Theme.of(context)
-                                                .primaryColorDark,
-                                            width: 3.0,
-                                            strokeAlign:
-                                                BorderSide.strokeAlignInside),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(100.0)),
-                                      ),
-                                      border: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(100.0)),
-                                      ),
-                                      prefixIcon: const Icon(
-                                        Icons.location_on_outlined,
-                                      ),
-                                    ),
-                                    validator: FormBuilderValidators.required(),
-                                  ),
+                                      validator: FormBuilderValidators.compose([
+                                        FormBuilderValidators.minLength(4,
+                                            allowEmpty: true,
+                                            errorText:
+                                                "Autocomplete available after entering 4 characters"),
+                                      ])),
                                 ],
                               ),
                               // Check in & Check out
@@ -525,26 +564,22 @@ class _MainScreenState extends State<MainScreen> {
                                               Icons.edit_calendar_rounded,
                                             ),
                                           ),
-                                          validator:
-                                              FormBuilderValidators.compose([
-                                            FormBuilderValidators.required(),
-                                            (DateTime? input) {
-                                              bool? v =
-                                                  _checkoutController.isBlank;
-                                              String f = (v != null && !v)
-                                                  ? _checkoutController.text
-                                                  : "";
+                                          validator: (DateTime? input) {
+                                            bool? v =
+                                                _checkoutController.isBlank;
+                                            String f = (v != null && !v)
+                                                ? _checkoutController.text
+                                                : "";
 
-                                              if (input != null &&
-                                                  f != "" &&
-                                                  DateFormat.yMd('fr_FR')
-                                                      .parse(f)
-                                                      .isBefore(input)) {
-                                                return "Check-in must be before Check-out";
-                                              }
-                                              return null;
-                                            },
-                                          ]),
+                                            if (input != null &&
+                                                f != "" &&
+                                                DateFormat.yMd('fr_FR')
+                                                    .parse(f)
+                                                    .isBefore(input)) {
+                                              return "Check-in must be before Check-out";
+                                            }
+                                            return null;
+                                          },
                                         ),
                                       ],
                                     ),
@@ -630,26 +665,22 @@ class _MainScreenState extends State<MainScreen> {
                                               Icons.edit_calendar_rounded,
                                             ),
                                           ),
-                                          validator:
-                                              FormBuilderValidators.compose([
-                                            FormBuilderValidators.required(),
-                                            (DateTime? input) {
-                                              bool? v =
-                                                  _checkinController.isBlank;
-                                              String f = (v != null && !v)
-                                                  ? _checkinController.text
-                                                  : "";
+                                          validator: (DateTime? input) {
+                                            bool? v =
+                                                _checkinController.isBlank;
+                                            String f = (v != null && !v)
+                                                ? _checkinController.text
+                                                : "";
 
-                                              if (input != null &&
-                                                  f != "" &&
-                                                  DateFormat.yMd('fr_FR')
-                                                      .parse(f)
-                                                      .isAfter(input)) {
-                                                return "Check-in must be before Check-out";
-                                              }
-                                              return null;
-                                            },
-                                          ]),
+                                            if (input != null &&
+                                                f != "" &&
+                                                DateFormat.yMd('fr_FR')
+                                                    .parse(f)
+                                                    .isAfter(input)) {
+                                              return "Check-in must be before Check-out";
+                                            }
+                                            return null;
+                                          },
                                         ),
                                       ],
                                     ),
