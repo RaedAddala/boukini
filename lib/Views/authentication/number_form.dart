@@ -23,7 +23,6 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
   @override
   void dispose() {
     _myController.dispose();
-    Get.delete<GlobalFormThemeVarController>();
     super.dispose();
   }
 

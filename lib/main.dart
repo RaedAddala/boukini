@@ -4,11 +4,13 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:intl/date_symbol_data_local.dart';
 
 import './config/routes.dart';
 import 'utils/material_theme.dart';
 
-void main() {
+Future<void> main() async {
+  await initializeDateFormatting('fr_FR', null);
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);

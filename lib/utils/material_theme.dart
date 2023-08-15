@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'dart:math';
 
-const double circularBorderValue = 12;
-const double borderSideWidth = 1;
-const formFillColor = Color(0xff0496ff);
+const double circularBorderValue = 18;
+const double borderSideWidth = 1.2;
+const formFillColor = Color(0xfff8f8f5);
 final OutlineInputBorder formFocusedBorder = OutlineInputBorder(
   borderRadius: borderRadius,
   borderSide: BorderSide(
@@ -26,15 +26,17 @@ const BorderRadius borderRadius = BorderRadius.all(
 );
 
 abstract class AppTheme {
-  static const _elevation = MaterialStatePropertyAll<double>(2);
+  static const _elevation = MaterialStatePropertyAll<double>(3.2);
+  static const _colorSchemeSeed = Color(0xff0850B9);
+  static final _txtTheme =
+      GoogleFonts.alegreyaTextTheme().merge(GoogleFonts.comfortaaTextTheme());
   static ThemeData lightTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     useMaterial3: true,
-    colorSchemeSeed: const Color(0xff0496ff),
+    colorSchemeSeed: _colorSchemeSeed,
     typography: Typography.material2021(),
     brightness: Brightness.light,
-    textTheme:
-        GoogleFonts.comfortaaTextTheme().merge(GoogleFonts.alegreyaTextTheme()),
+    textTheme: _txtTheme,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -86,11 +88,10 @@ abstract class AppTheme {
   static ThemeData darkTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     useMaterial3: true,
-    colorSchemeSeed: const Color(0xff00b4d8),
+    colorSchemeSeed: _colorSchemeSeed, // const Color(0xff00b4d8),
     typography: Typography.material2021(colorScheme: const ColorScheme.dark()),
     brightness: Brightness.dark,
-    textTheme:
-        GoogleFonts.comfortaaTextTheme().merge(GoogleFonts.alegreyaTextTheme()),
+    textTheme: _txtTheme,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
