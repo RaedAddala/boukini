@@ -1,0 +1,2 @@
+# exclude the API key from version control
+env.g.dart

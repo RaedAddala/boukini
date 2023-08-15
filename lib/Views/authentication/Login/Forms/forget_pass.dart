@@ -4,10 +4,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
-import '../../../../utils/spaces.dart';
-import '../../../../utils/theme.dart';
+import '../../../../utils/style/spaces.dart';
+import '../../../../utils/style/theme.dart';
 import '../../controllers/page_controller.dart';
-import '../../../../utils/material_theme.dart';
+import '../../../../utils/style/material_theme.dart';
 
 class ForgetPasswordForm extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;

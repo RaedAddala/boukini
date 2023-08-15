@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking/utils/screen.dart';
+import 'package:hotel_booking/utils/style/screen.dart';
 
 import '../../controllers/form_colors_controller.dart';
 import '../controllers/page_controller.dart';

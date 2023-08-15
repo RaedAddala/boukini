@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:hotel_booking/utils/material_theme.dart';
+import 'package:hotel_booking/utils/style/material_theme.dart';
 
-import 'package:hotel_booking/utils/screen.dart';
+import 'package:hotel_booking/utils/style/screen.dart';
 
 import '../controllers/form_colors_controller.dart';
 

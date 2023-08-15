@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking/utils/material_theme.dart';
-import 'package:hotel_booking/utils/spaces.dart';
-import 'package:hotel_booking/utils/theme.dart';
+import 'package:hotel_booking/utils/style/material_theme.dart';
+import 'package:hotel_booking/utils/style/spaces.dart';
+import 'package:hotel_booking/utils/style/theme.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../../controllers/page_controller.dart';

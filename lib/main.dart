@@ -7,7 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:intl/date_symbol_data_local.dart';
 
 import './config/routes.dart';
-import 'utils/material_theme.dart';
+import 'utils/style/material_theme.dart';
 
 Future<void> main() async {
   await initializeDateFormatting('fr_FR', null);

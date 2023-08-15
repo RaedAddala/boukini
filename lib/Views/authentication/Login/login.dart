@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/screen.dart';
-import '../../../utils/spaces.dart';
-import '../../../utils/theme.dart';
+import '../../../utils/style/screen.dart';
+import '../../../utils/style/spaces.dart';
+import '../../../utils/style/theme.dart';
 import '../controllers/page_controller.dart';
 import '../otp_verification.dart';
 import 'Forms/enter_pass.dart';

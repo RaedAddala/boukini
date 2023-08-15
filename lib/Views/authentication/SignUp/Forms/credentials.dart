@@ -4,9 +4,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking/Views/authentication/controllers/page_controller.dart';
-import 'package:hotel_booking/utils/spaces.dart';
-import 'package:hotel_booking/utils/theme.dart';
-import '../../../../utils/material_theme.dart';
+import 'package:hotel_booking/utils/style/spaces.dart';
+import 'package:hotel_booking/utils/style/theme.dart';
+import '../../../../utils/style/material_theme.dart';
 
 import '../../controllers/input_formatters.dart';
 
