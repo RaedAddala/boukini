@@ -21,7 +21,7 @@ class _GeoApiClient implements GeoApiClient {
   String? baseUrl;
 
   @override
-  Future<List<Place>> getSuggestions(
+  Future<ApiResponse> getSuggestionsResponse(
     String txt,
     String key,
   ) async {
@@ -29,8 +29,8 @@ class _GeoApiClient implements GeoApiClient {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Place>>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ApiResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -46,9 +46,7 @@ class _GeoApiClient implements GeoApiClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => Place.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = ApiResponse.fromJson(_result.data!);
     return value;
   }
 

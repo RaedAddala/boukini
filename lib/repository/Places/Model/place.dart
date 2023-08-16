@@ -3,11 +3,11 @@ part 'place.g.dart';
 
 @JsonSerializable()
 class Place {
-  String? name;
-  String? city;
-  String? district;
-  String? state;
-  String country;
+  final String? name;
+  final String? city;
+  final String? district;
+  final String? state;
+  final String country;
   Place({
     this.name,
     this.city,

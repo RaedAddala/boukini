@@ -398,13 +398,14 @@ class _MainScreenState extends State<MainScreen> {
                                         if (pattern.isNotEmpty &&
                                             pattern.length > 4) {
                                           var places = await PlaceRepository
-                                              .client
                                               .getSuggestions(
-                                                  pattern, Env.geoApifyKey);
+                                            pattern,
+                                          );
                                           return places.map((e) {
                                             StringBuffer buf = StringBuffer();
-                                            if (e.name != null)
+                                            if (e.name != null) {
                                               buf.write(e.name);
+                                            }
                                             if (e.district != null) {
                                               if (buf.isNotEmpty) {
                                                 buf.write(" , ");
@@ -427,7 +428,7 @@ class _MainScreenState extends State<MainScreen> {
                                             buf.write(" , ");
                                             buf.write(e.country);
                                             return buf.toString();
-                                          });
+                                          }).toList();
                                         }
                                         return <String>[];
                                       },

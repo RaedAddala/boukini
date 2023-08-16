@@ -1,16 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:hotel_booking/config/consume_services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import './config/routes.dart';
 import 'utils/style/material_theme.dart';
 
 Future<void> main() async {
-  await initializeDateFormatting('fr_FR', null);
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -23,6 +23,9 @@ Future<void> main() async {
     yield LicenseEntryWithLineBreaks(['google_fonts'], comfortaalicense);
     yield LicenseEntryWithLineBreaks(['google_fonts'], alegreyalicense);
   });
+  await initializeDateFormatting('fr_FR', null);
+  Services.init(); // Initializes services that are needed globally.
+
   runApp(const MainApp());
 }
 
