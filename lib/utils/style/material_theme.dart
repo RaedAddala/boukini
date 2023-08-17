@@ -26,7 +26,9 @@ const BorderRadius borderRadius = BorderRadius.all(
 );
 
 abstract class AppTheme {
-  static const _elevation = MaterialStatePropertyAll<double>(3.2);
+  static final _shadowColor =
+      MaterialStatePropertyAll(Colors.grey.shade500.withOpacity(0.5));
+  static const _elevation = MaterialStatePropertyAll<double>(2.2);
   static const _colorSchemeSeed = Color(0xff0850B9);
   static final _txtTheme =
       GoogleFonts.alegreyaTextTheme().merge(GoogleFonts.comfortaaTextTheme());
@@ -45,6 +47,7 @@ abstract class AppTheme {
           ),
         ),
         elevation: _elevation,
+        shadowColor: _shadowColor,
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(
@@ -100,6 +103,7 @@ abstract class AppTheme {
           ),
         ),
         elevation: _elevation,
+        shadowColor: _shadowColor,
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(

@@ -1,10 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking/env/env.dart';
 import 'package:hotel_booking/repository/Places/places_repository.dart';
 import 'package:intl/intl.dart';
 
@@ -26,10 +26,40 @@ class _MainScreenState extends State<MainScreen> {
   int _index = 0;
   bool notification = true;
   int _categorieIndex = 0;
+
+  static const cards = <Map<String, dynamic>>[
+    {
+      "price": 220.0,
+      "rating": 4.5,
+      "name": "Djerba Resort",
+      "location": "Zone Touristique, Djerba",
+      "picturePath": "assets/images/resort.jpg",
+    },
+    {
+      "price": 520.0,
+      "rating": 4.8,
+      "name": "Laicos",
+      "location": "Mohamed V, Tunis",
+      "picturePath": "assets/images/laico.jpg",
+    },
+    {
+      "price": 592.0,
+      "rating": 5.0,
+      "name": "Marriott",
+      "location": "Centre Urbain Nord, Djerba",
+      "picturePath": "assets/images/marriott.png",
+    },
+  ];
+
   static const yellowish = Color(0xffbdfd58);
   final formKey = GlobalKey<FormBuilderState>();
   final _checkinController = TextEditingController();
   final _checkoutController = TextEditingController();
+
+  final _pageviewController = PageController(
+    viewportFraction: 0.75,
+    initialPage: 0,
+  );
 
   final borderCircularRadius = BorderRadius.circular(20);
 
@@ -37,6 +67,7 @@ class _MainScreenState extends State<MainScreen> {
   void dispose() {
     _checkinController.dispose();
     _checkoutController.dispose();
+    _pageviewController.dispose();
     super.dispose();
   }
 
@@ -70,6 +101,8 @@ class _MainScreenState extends State<MainScreen> {
         child: Stack(
           children: [
             Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 /* 
               * Header contains : 
@@ -205,8 +238,72 @@ class _MainScreenState extends State<MainScreen> {
                */
                 Expanded(
                   flex: 3,
-                  child: Container(
-                    color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Popular",
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                              Text(
+                                "see All",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium!
+                                    .copyWith(color: Colors.blue.shade200),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 202,
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                controller: _pageviewController,
+                                physics: const BouncingScrollPhysics(
+                                  decelerationRate: ScrollDecelerationRate.fast,
+                                ),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                children: cards
+                                    .map((e) => Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                            vertical: 3,
+                                          ),
+                                          child: SizedBox(
+                                            height: 202,
+                                            width: Get.width * 0.55,
+                                            child: Item(
+                                                width: Get.width * 0.55,
+                                                height: 202,
+                                                price: e["price"],
+                                                rating: e["rating"],
+                                                name: e["name"],
+                                                location: e["location"],
+                                                picturePath: e["picturePath"]),
+                                          ),
+                                        ))
+                                    .toList(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -221,18 +318,18 @@ class _MainScreenState extends State<MainScreen> {
                   width: screenWidthPercentage(context, percentage: 0.78),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.onPrimary,
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(22),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.shade800.withOpacity(0.8),
+                        color: Colors.grey.shade400.withOpacity(0.4),
                         spreadRadius: 2,
-                        blurRadius: 10,
+                        blurRadius: 5,
                       ),
                     ],
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: 5.0,
+                      vertical: 4.0,
                       horizontal: 12.0,
                     ),
                     child: Column(
@@ -271,8 +368,6 @@ class _MainScreenState extends State<MainScreen> {
                                                   Theme.of(context)
                                                       .colorScheme
                                                       .background),
-                                          shadowColor: MaterialStatePropertyAll(
-                                              Theme.of(context).shadowColor),
                                           backgroundColor:
                                               MaterialStatePropertyAll(
                                                   (_categorieIndex == 0)
@@ -310,8 +405,6 @@ class _MainScreenState extends State<MainScreen> {
                                                   Theme.of(context)
                                                       .colorScheme
                                                       .background),
-                                          shadowColor: MaterialStatePropertyAll(
-                                              Theme.of(context).shadowColor),
                                           backgroundColor:
                                               MaterialStatePropertyAll(
                                                   (_categorieIndex == 1)
@@ -349,8 +442,6 @@ class _MainScreenState extends State<MainScreen> {
                                                   Theme.of(context)
                                                       .colorScheme
                                                       .background),
-                                          shadowColor: MaterialStatePropertyAll(
-                                              Theme.of(context).shadowColor),
                                           backgroundColor:
                                               MaterialStatePropertyAll(
                                                   (_categorieIndex == 2)
@@ -371,7 +462,7 @@ class _MainScreenState extends State<MainScreen> {
                               // search autocomplete but it is not free
                               //
                               const SizedBox(
-                                height: 5,
+                                height: 3,
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -424,7 +515,6 @@ class _MainScreenState extends State<MainScreen> {
                                               }
                                               buf.write(e.state);
                                             }
-
                                             buf.write(" , ");
                                             buf.write(e.country);
                                             return buf.toString();
@@ -480,7 +570,7 @@ class _MainScreenState extends State<MainScreen> {
                               ),
                               // Check in & Check out
                               const SizedBox(
-                                height: 7,
+                                height: 4,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -708,8 +798,6 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                                 surfaceTintColor: MaterialStatePropertyAll(
                                     Theme.of(context).colorScheme.background),
-                                shadowColor: MaterialStatePropertyAll(
-                                    Theme.of(context).shadowColor),
                                 minimumSize: const MaterialStatePropertyAll(
                                     Size(double.infinity, 34)),
                                 maximumSize: const MaterialStatePropertyAll(
@@ -729,7 +817,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ),
                         const SizedBox(
-                          height: 3,
+                          height: 1,
                         ),
                       ],
                     ),
@@ -747,14 +835,14 @@ class _MainScreenState extends State<MainScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
-              Radius.circular(35),
+              Radius.circular(30),
             ),
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                spreadRadius: 10,
-                blurRadius: 10,
-                color: Colors.black.withOpacity(.12),
+                spreadRadius: 2,
+                blurRadius: 5,
+                color: Colors.grey.shade300.withOpacity(.5),
               )
             ],
           ),
@@ -804,6 +892,169 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class Item extends StatelessWidget {
+  final double price;
+  final double rating;
+  final String name;
+  final String location;
+  final String picturePath;
+
+  final double height;
+  final double width;
+
+  const Item({
+    super.key,
+    required this.price,
+    required this.rating,
+    required this.name,
+    required this.location,
+    required this.picturePath,
+    required this.height,
+    required this.width,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(23),
+        ),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            spreadRadius: 2,
+            blurRadius: 5,
+            color: Colors.grey.shade200.withOpacity(.6),
+          )
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              SizedBox(
+                height: height * 0.55,
+                width: width,
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: Image.asset(
+                    picturePath,
+                    filterQuality: FilterQuality.high,
+                    isAntiAlias: true,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 8,
+                right: 8,
+                child: Container(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    color: Colors.grey.shade900.withOpacity(0.28),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 2.0, horizontal: 4.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.star,
+                          size: 15,
+                          color: Colors.amber.shade200.withOpacity(0.9),
+                        ),
+                        const SizedBox(width: 1.5),
+                        Text(
+                          rating.toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelMedium!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(name,
+                                style: Theme.of(context).textTheme.labelMedium),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(12),
+                              ),
+                              color: Colors.grey.shade900.withOpacity(0.05),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Icon(
+                                Icons.bookmark_outline,
+                                size: 24,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 2),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.location_on_outlined,
+                              color: Colors.blue.shade300, size: 15),
+                          const SizedBox(width: 5),
+                          Expanded(
+                            child: Text(
+                              location,
+                              style: Theme.of(context).textTheme.labelSmall,
+                              softWrap: true,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
