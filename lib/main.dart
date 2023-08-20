@@ -6,9 +6,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:hotel_booking/config/consume_services.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import './config/routes.dart';
 import 'utils/style/material_theme.dart';
+
+bool firstTime = true;
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +27,10 @@ Future<void> main() async {
     yield LicenseEntryWithLineBreaks(['google_fonts'], alegreyalicense);
   });
   await initializeDateFormatting('fr_FR', null);
-  Services.init(); // Initializes services that are needed globally.
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  firstTime = sharedPreferences.getBool('firstTime') ?? true;
+  await sharedPreferences.setBool('firstTime', false);
+  //Services.init(); // Initializes services that are needed globally.
 
   runApp(const MainApp());
 }
@@ -44,7 +50,7 @@ class MainApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      initialRoute: Routes.mainScreen,
+      initialRoute: Routes.welcome,
       getPages: getPages,
     );
   }

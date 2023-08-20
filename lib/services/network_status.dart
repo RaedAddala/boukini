@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'package:get/get.dart';
@@ -10,24 +9,27 @@ class NetworkStatusService extends GetxService {
 
   @override
   Future<void> onReady() async {
-    super.onReady();
     _connectionDialogShown = !(await InternetConnectionChecker().hasConnection);
     if (_connectionDialogShown) {
       Get.dialog(const NetworkErrorPage(), useSafeArea: false);
     }
+    super.onReady();
   }
 
   NetworkStatusService() {
-    Connectivity().onConnectivityChanged.listen(
-      (ConnectivityResult currStatus) async {
-        if (currStatus != ConnectivityResult.none &&
-            await InternetConnectionChecker().hasConnection) {
-          if (_connectionDialogShown) Get.back();
-        } else {
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      switch (status) {
+        case InternetConnectionStatus.connected:
+          if (_connectionDialogShown) {
+            Get.back();
+            _connectionDialogShown = false;
+          }
+          break;
+        case InternetConnectionStatus.disconnected:
           Get.dialog(const NetworkErrorPage(), useSafeArea: false);
           _connectionDialogShown = true;
-        }
-      },
-    );
+          break;
+      }
+    });
   }
 }

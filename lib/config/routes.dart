@@ -6,15 +6,39 @@ import '../Views/authentication/Login/login.dart';
 import '../Views/authentication/SignUp/signup.dart';
 import '../Views/authentication/number_form.dart';
 
+import '../screens/onboarding/onboarding.dart';
+import '../screens/onboarding/welcome.dart';
+
 class Routes {
   static String home = '/';
   static String phoneNumber = '/phoneNumber';
   static String signUp = '/signUp';
   static String logIn = '/logIn';
   static String mainScreen = '/mainScreen';
+
+  static String welcome = '/welcome';
+  static String onboarding = '/onboarding';
 }
 
 final getPages = [
+  GetPage(
+    name: Routes.onboarding,
+    page: () {
+      return const Onboarding();
+    },
+    transition: Transition.native,
+    transitionDuration: const Duration(milliseconds: 400),
+    curve: Curves.fastOutSlowIn,
+  ),
+  GetPage(
+    name: Routes.welcome,
+    page: () {
+      return const Welcome();
+    },
+    transition: Transition.native,
+    transitionDuration: const Duration(milliseconds: 400),
+    curve: Curves.fastOutSlowIn,
+  ),
   GetPage(
     name: Routes.mainScreen,
     page: () {

@@ -1,10 +1,12 @@
-import 'package:flutter/gestures.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:hotel_booking/Views/screens/see_all.dart';
 import 'package:hotel_booking/repository/Places/places_repository.dart';
 import 'package:intl/intl.dart';
 
@@ -254,12 +256,21 @@ class _MainScreenState extends State<MainScreen> {
                                 "Popular",
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
-                              Text(
-                                "see All",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium!
-                                    .copyWith(color: Colors.blue.shade200),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(SeeAll(
+                                      hotels: cards,
+                                      title: "Popular",
+                                      height: 400.0,
+                                      width: Get.width * 0.3));
+                                },
+                                child: Text(
+                                  "see All",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(color: Colors.blue.shade200),
+                                ),
                               ),
                             ],
                           ),
@@ -297,7 +308,8 @@ class _MainScreenState extends State<MainScreen> {
                                                 picturePath: e["picturePath"]),
                                           ),
                                         ))
-                                    .toList(),
+                                    .toList()
+                                    .sublist(0, min(3, cards.length)),
                               ),
                             ),
                           ],
@@ -920,6 +932,7 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
@@ -953,7 +966,7 @@ class Item extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 8,
+                top: 6,
                 right: 8,
                 child: Container(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -993,64 +1006,105 @@ class Item extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 4),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 3.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          const SizedBox(height: 2),
+          Container(
+            height: height * 0.4,
+            padding: const EdgeInsets.symmetric(horizontal: 4.5),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
               children: [
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(name,
-                                style: Theme.of(context).textTheme.labelMedium),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                              color: Colors.grey.shade900.withOpacity(0.05),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Icon(
-                                Icons.bookmark_outline,
-                                size: 24,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(name,
+                          style: Theme.of(context).textTheme.titleMedium),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        color: Colors.grey.shade900.withOpacity(0.05),
                       ),
-                      const SizedBox(height: 2),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.location_on_outlined,
-                              color: Colors.blue.shade300, size: 15),
-                          const SizedBox(width: 5),
-                          Expanded(
-                            child: Text(
-                              location,
-                              style: Theme.of(context).textTheme.labelSmall,
-                              softWrap: true,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: Icon(
+                          Icons.bookmark_outline,
+                          size: 24,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.location_on_outlined,
+                        color: Colors.blue.shade300, size: 15),
+                    const SizedBox(width: 2),
+                    Expanded(
+                      child: Text(
+                        location,
+                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                            color: Colors.blue.shade300, fontSize: 10),
+                        softWrap: true,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    Text(
+                      "Price:",
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    Text(
+                      price.toStringAsFixed(3),
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "/",
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "night",
+                                style: Theme.of(context).textTheme.labelSmall,
+                              ),
+                            ]),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 3),
               ],
             ),
           )
