@@ -26,9 +26,11 @@ dependencies:
   flutter_svg: 
   internet_connection_checker: 
   pretty_dio_logger: 
-  shared_preferences: ^2.2.0
-  liquid_swipe: ^3.1.0
-  smooth_page_indicator: ^1.1.0
+  shared_preferences: 
+  liquid_swipe: 
+  smooth_page_indicator: 
+  vector_graphics_compiler: 
+  octo_image: 
 
 dev_dependencies:
   flutter_test:

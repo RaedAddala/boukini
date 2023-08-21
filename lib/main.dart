@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -30,7 +31,7 @@ Future<void> main() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   firstTime = sharedPreferences.getBool('firstTime') ?? true;
   await sharedPreferences.setBool('firstTime', false);
-  //Services.init(); // Initializes services that are needed globally.
+  //if(!firstTime) Services.init(); // Initializes services that are needed globally.
 
   runApp(const MainApp());
 }
@@ -42,9 +43,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
     return GetMaterialApp(
-      builder: (context, child) {
-        return Directionality(textDirection: TextDirection.ltr, child: child!);
-      },
       title: "Boukini",
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
