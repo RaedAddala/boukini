@@ -22,15 +22,11 @@ dependencies:
   intl: 
   json_annotation: 
   retrofit: 
-
   flutter_svg: 
   internet_connection_checker: 
-  pretty_dio_logger: 
   shared_preferences: 
   liquid_swipe: 
   smooth_page_indicator: 
-  vector_graphics_compiler: 
-  octo_image: 
 
 dev_dependencies:
   flutter_test:

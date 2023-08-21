@@ -1,50 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:octo_image/octo_image.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Screen2 extends StatelessWidget {
   const Screen2({super.key});
   @override
   Widget build(BuildContext context) {
-    final double height = Get.height;
-    final double width = Get.width;
     return Container(
-      color: Colors.red.shade50.withOpacity(0.46),
-      padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 21.5),
+      color: Colors.grey.shade100,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 12),
-          OctoImage(
-            image: const AssetImage("assets/onboarding/find.jpg"),
-            filterQuality: FilterQuality.high,
+          const SizedBox(height: 15),
+          SvgPicture.asset(
+            "assets/onboarding/screen2.svg",
+            height: 340,
             fit: BoxFit.fill,
-            fadeInCurve: Curves.easeInOut,
-            fadeInDuration: const Duration(milliseconds: 400),
-            progressIndicatorBuilder:
-                OctoProgressIndicator.circularProgressIndicator(),
-            errorBuilder: OctoError.icon(),
-            height: height * 0.42,
-            width: width * 0.8,
+            placeholderBuilder: (BuildContext context) => Container(
+                padding: const EdgeInsets.all(30.0),
+                child: const CircularProgressIndicator()),
           ),
-          Column(
-            children: [
-              Text(
-                "Choose Your Accommodation",
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      fontSize: 20.5,
-                      fontWeight: FontWeight.bold,
-                    ),
-                textAlign: TextAlign.start,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                "Browse our accommodation catalog, set your needs and choose the most suitable one.",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ],
+          const SizedBox(height: 15),
+          Text(
+            "Make A Reservation",
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          Text(
+            "After choosing a hotel, Set the date of your check-in and check-out. Make a reservation demand and wait for the hotel's response.",
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontSize: 14
+                ),
+                            textAlign: TextAlign.center,
+
           ),
           const SizedBox(height: 50),
         ],

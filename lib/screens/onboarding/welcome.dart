@@ -48,8 +48,12 @@ class Welcome extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 SvgPicture.asset(
-                  "assets/onboarding/welcomePage.svg",
+                  "assets/onboarding/screen0.svg",
                   height: 300,
+                  fit: BoxFit.fill,
+                  placeholderBuilder: (BuildContext context) => Container(
+                      padding: const EdgeInsets.all(30.0),
+                      child: const CircularProgressIndicator()),
                 ),
                 const SizedBox(height: 15),
                 Text(
@@ -81,7 +85,7 @@ class Welcome extends StatelessWidget {
                         .elevatedButtonTheme
                         .style!
                         .copyWith(
-                          elevation: const MaterialStatePropertyAll(4),
+                          elevation: const MaterialStatePropertyAll(6.5),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
