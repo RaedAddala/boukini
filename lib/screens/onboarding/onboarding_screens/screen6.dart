@@ -6,13 +6,13 @@ class Screen6 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red.shade50,
+      color: Colors.blueGrey.shade100,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           SvgPicture.asset(
             "assets/onboarding/screen6.svg",
             height: 330,
@@ -23,7 +23,7 @@ class Screen6 extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            "",
+            "InAPP Wallet",
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

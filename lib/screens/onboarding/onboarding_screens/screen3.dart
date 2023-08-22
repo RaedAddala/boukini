@@ -6,13 +6,13 @@ class Screen3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blueGrey.shade50,
+      color: Colors.grey.shade100,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           SvgPicture.asset(
             "assets/onboarding/screen3.svg",
             height: 330,

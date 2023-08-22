@@ -6,13 +6,13 @@ class Screen5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red.shade50,
+      color: Colors.blueGrey.shade50,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           SvgPicture.asset(
             "assets/onboarding/screen5.svg",
             height: 330,

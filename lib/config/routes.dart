@@ -24,7 +24,7 @@ final getPages = [
   GetPage(
     name: Routes.onboarding,
     page: () {
-      return const Onboarding();
+      return Onboarding();
     },
     transition: Transition.native,
     transitionDuration: const Duration(milliseconds: 400),
