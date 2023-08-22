@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:hotel_booking/config/consume_services.dart';
 import 'package:hotel_booking/config/routes.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
@@ -27,7 +28,7 @@ class OnboardingController extends GetxController {
   RxInt currentIndex = 0.obs;
 
   void prevView() {
-    if (currentIndex > 0) currentIndex--;
+    if (currentIndex.value > 0) currentIndex.value--;
     _pageController.animateToPage(
       page: currentIndex.value,
       duration: 800,
@@ -35,18 +36,19 @@ class OnboardingController extends GetxController {
   }
 
   void nextView() {
-    if (currentIndex + 1 < _numPages) {
-      // currentIndex++;
+    currentIndex.value++;
+    if (currentIndex.value == numPages) {
+      skip();
+    } else {
       _pageController.animateToPage(
         page: currentIndex.value,
         duration: 950,
       );
-    } else {
-      Get.offAllNamed(Routes.home);
     }
   }
 
-  void setPageValue(int i) {
-    currentIndex.value = i;
+  Future<void> skip() async {
+    await Get.offAllNamed(Routes.phoneNumber);
+    Services.init();
   }
 }

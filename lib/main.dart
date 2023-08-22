@@ -5,15 +5,18 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:hotel_booking/config/consume_services.dart';
+import 'package:hotel_booking/config/globals.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import './config/routes.dart';
 import 'utils/style/material_theme.dart';
 
-bool firstTime = true;
+bool _firstTime = true;
+
 
 Future<void> main() async {
+  Globals.connected = false;
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -27,10 +30,14 @@ Future<void> main() async {
     yield LicenseEntryWithLineBreaks(['google_fonts'], alegreyalicense);
   });
   await initializeDateFormatting('fr_FR', null);
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  firstTime = sharedPreferences.getBool('firstTime') ?? true;
-  await sharedPreferences.setBool('firstTime', false);
-  //if(!firstTime) Services.init(); // Initializes services that are needed globally.
+  // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  // _firstTime = sharedPreferences.getBool('firstTime') ?? true;
+  // Globals.connected = sharedPreferences.getBool('connected') ?? false;
+  // await sharedPreferences.setBool('firstTime', false);
+
+  if (!_firstTime) {
+    Services.init(); // Initializes services that are needed globally.
+  }
 
   runApp(const MainApp());
 }
@@ -47,7 +54,11 @@ class MainApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      initialRoute: Routes.welcome,
+      initialRoute: _firstTime
+          ? Routes.welcome
+          : Globals.connected
+              ? Routes.mainScreen
+              : Routes.phoneNumber,
       getPages: getPages,
     );
   }

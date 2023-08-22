@@ -7,15 +7,6 @@ import '../Views/no_connection/network_error.dart';
 class NetworkStatusService extends GetxService {
   bool _connectionDialogShown = false;
 
-  @override
-  Future<void> onReady() async {
-    _connectionDialogShown = !(await InternetConnectionChecker().hasConnection);
-    if (_connectionDialogShown) {
-      Get.dialog(const NetworkErrorPage(), useSafeArea: false);
-    }
-    super.onReady();
-  }
-
   NetworkStatusService() {
     InternetConnectionChecker().onStatusChange.listen((status) {
       switch (status) {

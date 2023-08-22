@@ -8,6 +8,11 @@ import '../Views/authentication/number_form.dart';
 
 import '../screens/onboarding/onboarding.dart';
 import '../screens/onboarding/welcome.dart';
+import 'globals.dart';
+
+const _transitionDuration = Duration(milliseconds: 200);
+const _transitionCurve = Curves.fastOutSlowIn;
+const _transitionType = Transition.native;
 
 class Routes {
   static String home = '/';
@@ -26,33 +31,27 @@ final getPages = [
     page: () {
       return Onboarding();
     },
-    transition: Transition.native,
-    transitionDuration: const Duration(milliseconds: 400),
-    curve: Curves.fastOutSlowIn,
+    transition: _transitionType,
+    transitionDuration: _transitionDuration,
+    curve: _transitionCurve,
   ),
   GetPage(
     name: Routes.welcome,
     page: () {
       return const Welcome();
     },
-    transition: Transition.native,
-    transitionDuration: const Duration(milliseconds: 400),
-    curve: Curves.fastOutSlowIn,
+    transition: _transitionType,
+    transitionDuration: _transitionDuration,
+    curve: _transitionCurve,
   ),
   GetPage(
     name: Routes.mainScreen,
     page: () {
       return const MainScreen();
     },
-    transition: Transition.leftToRightWithFade,
-    transitionDuration: const Duration(milliseconds: 400),
-    curve: Curves.fastOutSlowIn,
-  ),
-  GetPage(
-    name: Routes.home,
-    page: () {
-      return const Text("Welcome");
-    },
+    transition: _transitionType,
+    transitionDuration: _transitionDuration,
+    curve: _transitionCurve,
     middlewares: [
       RouteGuard(),
     ],
@@ -62,18 +61,18 @@ final getPages = [
     page: () {
       return const PhoneNumberForm();
     },
-    transition: Transition.leftToRightWithFade,
-    transitionDuration: const Duration(milliseconds: 400),
-    curve: Curves.fastOutSlowIn,
+    transition: _transitionType,
+    transitionDuration: _transitionDuration,
+    curve: _transitionCurve,
   ),
   GetPage(
     name: Routes.signUp,
     page: () {
       return const SignUpForms();
     },
-    transition: Transition.leftToRightWithFade,
-    transitionDuration: const Duration(milliseconds: 400),
-    curve: Curves.fastOutSlowIn,
+    transition: _transitionType,
+    transitionDuration: _transitionDuration,
+    curve: _transitionCurve,
   ),
   GetPage(
     name: Routes.logIn,
@@ -82,18 +81,15 @@ final getPages = [
         skipOtp: false,
       );
     },
-    transition: Transition.leftToRightWithFade,
-    transitionDuration: const Duration(milliseconds: 400),
-    curve: Curves.fastOutSlowIn,
+    transition: _transitionType,
+    transitionDuration: _transitionDuration,
+    curve: _transitionCurve,
   ),
 ];
-
-/* This will be managed in the future */
-dynamic userToken;
 
 class RouteGuard extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
-    return userToken == null ? RouteSettings(name: Routes.phoneNumber) : null;
+    return Globals.connected ? RouteSettings(name: Routes.phoneNumber) : null;
   }
 }

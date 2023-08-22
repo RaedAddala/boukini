@@ -80,16 +80,12 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
                             width: 26,
                             height: 26,
                           ),
-                          const SizedBox(
-                            width: 2,
-                          ),
                           Text(
-                            "Boukini",
+                            "oukini",
                             style: Theme.of(context)
                                 .textTheme
                                 .displaySmall!
-                                .copyWith(
-                                    color: Theme.of(context).primaryColor),
+                                .copyWith(color: Colors.cyan.shade600),
                           ),
                         ],
                       ),

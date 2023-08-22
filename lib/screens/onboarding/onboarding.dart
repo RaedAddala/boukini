@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hotel_booking/screens/onboarding/controllers/onboarding_controller.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
-import 'package:hotel_booking/config/routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Onboarding extends StatelessWidget {
@@ -23,14 +22,13 @@ class Onboarding extends StatelessWidget {
           child: Stack(
             children: [
               LiquidSwipe(
-                  liquidController: _controller.pageController,
-                  onPageChangeCallback: (index) {
-                    // setState(() {
-                    //   _currentIndex = index;
-                    // });
-                  },
-                  enableLoop: false,
-                  pages: OnboardingController.pages),
+                liquidController: _controller.pageController,
+                onPageChangeCallback: (activePageIndex) {
+                  _controller.currentIndex.value = activePageIndex;
+                },
+                enableLoop: false,
+                pages: OnboardingController.pages,
+              ),
               Positioned(
                 bottom: 65,
                 left: 0,
@@ -141,6 +139,7 @@ class Onboarding extends StatelessWidget {
                 top: 0,
                 right: 3,
                 child: TextButton(
+                  onPressed: _controller.skip,
                   child: const Text(
                     "Skip",
                     style: TextStyle(
@@ -149,7 +148,6 @@ class Onboarding extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  onPressed: () => Get.offAllNamed(Routes.home),
                 ),
               ),
               Positioned(
