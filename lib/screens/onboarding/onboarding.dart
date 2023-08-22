@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
@@ -38,7 +36,7 @@ class _OnboardingState extends State<Onboarding> {
         if (_currentIndex > 0) _currentIndex--;
         _pageController.animateToPage(
           page: _currentIndex,
-          duration: 700,
+          duration: 800,
         );
         return Future<bool>.value(false);
       },
@@ -54,7 +52,6 @@ class _OnboardingState extends State<Onboarding> {
                   });
                 },
                 enableLoop: false,
-                enableSideReveal: true,
                 pages: const [
                   Screen1(),
                   Screen2(),
@@ -64,37 +61,128 @@ class _OnboardingState extends State<Onboarding> {
                 ],
               ),
               Positioned(
-                bottom: 12,
-                left: 22,
-                child: Center(
-                  child: OutlinedButton(
-                    onPressed: () {
-                      if (_currentIndex < _numPages) _currentIndex++;
-                      _pageController.animateToPage(
-                        page: _currentIndex,
-                        duration: 700,
-                      );
-                    },
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.black38),
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(14),
-                      foregroundColor: Colors.white,
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                        shape: BoxShape.circle,
+                bottom: 65,
+                left: 0,
+                right: 0,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: SizedBox(
+                      width: Get.width * 0.2,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_currentIndex + 1 < _numPages) {
+                            _currentIndex++;
+                            _pageController.animateToPage(
+                              page: _currentIndex,
+                              duration: 800,
+                            );
+                          } else {
+                            Get.offAllNamed(Routes.home);
+                          }
+                        },
+                        style: Theme.of(context)
+                            .elevatedButtonTheme
+                            .style!
+                            .copyWith(
+                              padding: const MaterialStatePropertyAll(
+                                EdgeInsets.symmetric(
+                                  horizontal: 7,
+                                  vertical: 2,
+                                ),
+                              ),
+                              elevation: const MaterialStatePropertyAll(3.5),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                              surfaceTintColor: MaterialStatePropertyAll(
+                                  Theme.of(context).colorScheme.background),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Colors.grey.shade50),
+                              foregroundColor:
+                                  const MaterialStatePropertyAll(Colors.white),
+                            ),
+                        child: const Center(
+                          child: Text(
+                            "Next",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
                       ),
-                      child: const Icon(Icons.arrow_forward_ios_rounded),
                     ),
                   ),
                 ),
               ),
               Positioned(
-                top: 5,
-                right: 15,
+                bottom: 65,
+                left: 0,
+                right: 0,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: SizedBox(
+                      width: Get.width * 0.2,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_currentIndex > 0) {
+                            _currentIndex--;
+                            _pageController.animateToPage(
+                              page: _currentIndex,
+                              duration: 800,
+                            );
+                          }
+                        },
+                        style: Theme.of(context)
+                            .elevatedButtonTheme
+                            .style!
+                            .copyWith(
+                              padding: const MaterialStatePropertyAll(
+                                EdgeInsets.symmetric(
+                                  horizontal: 7,
+                                  vertical: 2,
+                                ),
+                              ),
+                              elevation: const MaterialStatePropertyAll(3.5),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                              surfaceTintColor: MaterialStatePropertyAll(
+                                  Theme.of(context).colorScheme.background),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Colors.grey.shade50),
+                              foregroundColor:
+                                  const MaterialStatePropertyAll(Colors.white),
+                            ),
+                        child: const Center(
+                          child: Text(
+                            "Prev",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                right: 3,
                 child: TextButton(
                   child: const Text(
                     "Skip",
@@ -108,17 +196,20 @@ class _OnboardingState extends State<Onboarding> {
                 ),
               ),
               Positioned(
-                bottom: 45,
-                right: 38,
-                child: AnimatedSmoothIndicator(
-                  activeIndex: _currentIndex,
-                  count: _numPages,
-                  duration: const Duration(milliseconds: 350),
-                  effect: const ScrollingDotsEffect(
-                    dotHeight: 7,
-                    dotWidth: 14,
-                    activeDotScale: 1.6,
-                    offset: 22,
+                bottom: 20,
+                right: 0,
+                left: 0,
+                child: Center(
+                  child: AnimatedSmoothIndicator(
+                    activeIndex: _currentIndex,
+                    count: _numPages,
+                    duration: const Duration(milliseconds: 350),
+                    effect: const ScrollingDotsEffect(
+                      dotHeight: 7,
+                      dotWidth: 14,
+                      activeDotScale: 1.6,
+                      offset: 22,
+                    ),
                   ),
                 ),
               ),

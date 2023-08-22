@@ -7,21 +7,21 @@ class Screen2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey.shade100,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 15),
+          const SizedBox(height: 10),
           SvgPicture.asset(
             "assets/onboarding/screen2.svg",
-            height: 340,
+            height: 330,
             fit: BoxFit.fill,
             placeholderBuilder: (BuildContext context) => Container(
                 padding: const EdgeInsets.all(30.0),
                 child: const CircularProgressIndicator()),
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 4),
           Text(
             "Make A Reservation",
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
@@ -30,15 +30,13 @@ class Screen2 extends StatelessWidget {
                 ),
           ),
           const SizedBox(
-            height: 12,
+            height: 8,
           ),
           Text(
             "After choosing a hotel, Set the date of your check-in and check-out. Make a reservation demand and wait for the hotel's response.",
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontSize: 14
-                ),
-                            textAlign: TextAlign.center,
-
+            style:
+                Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14),
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 50),
         ],

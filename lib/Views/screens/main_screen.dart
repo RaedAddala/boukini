@@ -99,6 +99,7 @@ class _MainScreenState extends State<MainScreen> {
       backgroundColor: globals.scaffoldbackgroundColor,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
+        top: false,
         maintainBottomViewPadding: true,
         child: Stack(
           children: [
@@ -124,7 +125,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 14.0),
+                          vertical: 18.0, horizontal: 14.0),
                       child: Column(
                         children: [
                           Row(
@@ -321,7 +322,7 @@ class _MainScreenState extends State<MainScreen> {
               ],
             ),
             Positioned(
-              top: 62,
+              top: 68,
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: screenWidthPercentage(context, percentage: 0.11),

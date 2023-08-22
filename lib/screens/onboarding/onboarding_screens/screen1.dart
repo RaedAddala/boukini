@@ -7,21 +7,21 @@ class Screen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey.shade200,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 15),
+          const SizedBox(height: 10),
           SvgPicture.asset(
             "assets/onboarding/screen1.svg",
-            height: 340,
+            height: 330,
             fit: BoxFit.fill,
             placeholderBuilder: (BuildContext context) => Container(
                 padding: const EdgeInsets.all(30.0),
                 child: const CircularProgressIndicator()),
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 4),
           Text(
             "Choose Your Accommodation",
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
