@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:hotel_booking/config/consume_services.dart';
 import 'package:hotel_booking/config/routes.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
@@ -42,13 +41,12 @@ class OnboardingController extends GetxController {
     } else {
       _pageController.animateToPage(
         page: currentIndex.value,
-        duration: 950,
+        duration: 850,
       );
     }
   }
 
-  Future<void> skip() async {
-    await Get.offAllNamed(Routes.phoneNumber);
-    Services.init();
+  skip() {
+    Get.offAllNamed(Routes.phoneNumber);
   }
 }

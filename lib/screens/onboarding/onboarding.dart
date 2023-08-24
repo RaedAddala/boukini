@@ -30,15 +30,15 @@ class Onboarding extends StatelessWidget {
                 pages: OnboardingController.pages,
               ),
               Positioned(
-                bottom: 65,
+                bottom: 50,
                 left: 0,
                 right: 0,
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
                     child: SizedBox(
-                      width: Get.width * 0.2,
+                      width: Get.width * 0.25,
                       child: ElevatedButton(
                         onPressed: _controller.nextView,
                         style: Theme.of(context)
@@ -47,8 +47,8 @@ class Onboarding extends StatelessWidget {
                             .copyWith(
                               padding: const MaterialStatePropertyAll(
                                 EdgeInsets.symmetric(
-                                  horizontal: 7,
-                                  vertical: 2,
+                                  horizontal: 12,
+                                  vertical: 4,
                                 ),
                               ),
                               elevation: const MaterialStatePropertyAll(3.5),
@@ -83,15 +83,15 @@ class Onboarding extends StatelessWidget {
                 ),
               ),
               Positioned(
-                bottom: 65,
+                bottom: 50,
                 left: 0,
                 right: 0,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
                     child: SizedBox(
-                      width: Get.width * 0.2,
+                      width: Get.width * 0.25,
                       child: ElevatedButton(
                         onPressed: _controller.prevView,
                         style: Theme.of(context)
@@ -100,8 +100,8 @@ class Onboarding extends StatelessWidget {
                             .copyWith(
                               padding: const MaterialStatePropertyAll(
                                 EdgeInsets.symmetric(
-                                  horizontal: 7,
-                                  vertical: 2,
+                                  horizontal: 12,
+                                  vertical: 4,
                                 ),
                               ),
                               elevation: const MaterialStatePropertyAll(3.5),
@@ -159,7 +159,7 @@ class Onboarding extends StatelessWidget {
                     child: AnimatedSmoothIndicator(
                       activeIndex: _controller.currentIndex.value,
                       count: OnboardingController.numPages,
-                      duration: const Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 620),
                       effect: const ScrollingDotsEffect(
                         activeDotColor: Colors.white,
                         dotHeight: 7,

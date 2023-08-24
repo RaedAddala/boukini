@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hotel_booking/screens/authentication/otp.dart';
 
-import '../Views/screens/main_screen.dart';
 import '../Views/authentication/Login/login.dart';
 import '../Views/authentication/SignUp/signup.dart';
-import '../Views/authentication/number_form.dart';
 
+import '../screens/authentication/phone_number.dart';
+import '../screens/mainscreens/main_screen.dart';
 import '../screens/onboarding/onboarding.dart';
 import '../screens/onboarding/welcome.dart';
+
 import 'globals.dart';
 
 const _transitionDuration = Duration(milliseconds: 200);
@@ -15,17 +17,26 @@ const _transitionCurve = Curves.fastOutSlowIn;
 const _transitionType = Transition.native;
 
 class Routes {
-  static String home = '/';
-  static String phoneNumber = '/phoneNumber';
   static String signUp = '/signUp';
   static String logIn = '/logIn';
-  static String mainScreen = '/mainScreen';
+  static String dashboard = '/dashboard';
 
   static String welcome = '/welcome';
   static String onboarding = '/onboarding';
+  static String phoneNumber = '/phoneNumber';
+  static String otp = '/otp';
 }
 
 final getPages = [
+  GetPage(
+    name: Routes.otp,
+    page: () {
+      return const OTPForm();
+    },
+    transition: _transitionType,
+    transitionDuration: _transitionDuration,
+    curve: _transitionCurve,
+  ),
   GetPage(
     name: Routes.onboarding,
     page: () {
@@ -45,9 +56,9 @@ final getPages = [
     curve: _transitionCurve,
   ),
   GetPage(
-    name: Routes.mainScreen,
+    name: Routes.dashboard,
     page: () {
-      return const MainScreen();
+      return const MainScreen(index: 0);
     },
     transition: _transitionType,
     transitionDuration: _transitionDuration,

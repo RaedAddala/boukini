@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:hotel_booking/config/consume_services.dart';
+import 'package:hotel_booking/config/globals.dart';
 
 import 'Login/login.dart';
 import 'SignUp/signup.dart';
@@ -24,6 +26,14 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
   void dispose() {
     _myController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    if (!Globals.servicesInitialized) {
+      Services.init();
+    }
+    super.initState();
   }
 
   @override

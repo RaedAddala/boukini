@@ -15,7 +15,8 @@ dependencies:
   flutter_form_builder: 
   flutter_native_splash: 
   form_builder_extra_fields: 
-  form_builder_validators: 
+  form_builder_validators:
+  supabase_flutter:
   get: 
   google_fonts: 
   google_nav_bar: 
@@ -27,6 +28,13 @@ dependencies:
   shared_preferences: 
   liquid_swipe: 
   smooth_page_indicator: 
+  firebase_core: 
+  firebase_auth:
+  cloud_firestore:
+  flutter_udid:
+  country_picker:
+  pinput:
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -58,3 +66,4 @@ flutter:
     - assets/google_fonts/
     - assets/images/
     - assets/onboarding/
+    - assets/auth/
