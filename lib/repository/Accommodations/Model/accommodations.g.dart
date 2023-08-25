@@ -8,6 +8,7 @@ part of 'accommodations.dart';
 
 Accommodations _$AccommodationsFromJson(Map<String, dynamic> json) =>
     Accommodations(
+      id: json['id'] as int,
       name: json['name'] as String,
       category: json['category'] as String,
       location: json['location'] as String,
@@ -19,6 +20,7 @@ Accommodations _$AccommodationsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$AccommodationsToJson(Accommodations instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'category': instance.category,
       'location': instance.location,

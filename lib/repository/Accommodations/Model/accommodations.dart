@@ -3,6 +3,7 @@ part 'accommodations.g.dart';
 
 @JsonSerializable()
 class Accommodations {
+  final int id;
   final String name;
   final String category;
   final String location;
@@ -11,6 +12,7 @@ class Accommodations {
   final String picture;
   final int stars;
   Accommodations({
+    required this.id,
     required this.name,
     required this.category,
     required this.location,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
@@ -48,13 +49,28 @@ class Item extends StatelessWidget {
               SizedBox(
                 height: height * 0.55,
                 width: width,
-                child: FittedBox(
-                  fit: BoxFit.fill,
-                  child: Image.network(
-                    picturePath,
-                    filterQuality: FilterQuality.high,
-                    isAntiAlias: true,
+                child: CachedNetworkImage(
+                  imageUrl: picturePath,
+                  filterQuality: FilterQuality.high,
+                  placeholder: (context, url) => SizedBox(
+                    height: height * 0.21,
+                    width: height * 0.21,
+                    child: const Center(
+                        child: CircularProgressIndicator(strokeWidth: 3.0)),
                   ),
+                  errorWidget: (context, url, error) => Container(
+                    color: Colors.black12,
+                    child: Icon(
+                      Icons.error_outline_outlined,
+                      size: width * 0.4,
+                      color: Colors.red,
+                    ),
+                  ),
+                  fadeInCurve: Curves.bounceIn,
+                  fadeOutCurve: Curves.bounceOut,
+                  fadeOutDuration: const Duration(milliseconds: 350),
+                  fadeInDuration: const Duration(milliseconds: 700),
+                  fit: BoxFit.fill,
                 ),
               ),
               Positioned(
@@ -111,8 +127,13 @@ class Item extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: Text(name,
-                          style: Theme.of(context).textTheme.titleMedium),
+                      child: Text(
+                        name,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontSize: 14),
+                      ),
                     ),
                     Container(
                       decoration: BoxDecoration(

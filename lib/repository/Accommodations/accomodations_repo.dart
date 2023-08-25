@@ -8,13 +8,13 @@ class AccommodationsRepo {
   static Future<List<Accommodations>> getAllAccommodations() async {
     final PostgrestTransformBuilder hotels = _client
         .from('accommodations_boukini')
-        .select('name,category,location,price,rating,picture,stars')
+        .select('id,name,category,location,price,rating,picture,stars')
         .eq('category', 'Hotel')
         .order('rating', ascending: false)
         .limit(10);
     final villas = _client
         .from('accommodations_boukini')
-        .select('name,category,location,price,rating,picture,stars')
+        .select('id,name,category,location,price,rating,picture,stars')
         .eq('category', 'Villa')
         .order('rating', ascending: false)
         .limit(10);
@@ -30,7 +30,7 @@ class AccommodationsRepo {
     }
 
     final res = (resV + resH);
-    res.sort((a, b) => a.rating.compareTo(b.rating));
+    res.sort((a, b) => b.rating.compareTo(a.rating));
     return res;
   }
 }

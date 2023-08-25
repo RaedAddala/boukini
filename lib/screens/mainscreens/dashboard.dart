@@ -214,11 +214,15 @@ class _DashboardState extends State<Dashboard> {
                                   isLoaded = true;
                                 });
                               }
-                              Get.to(SeeAll(
+                              Get.to(
+                                SeeAll(
                                   hotels: cards,
                                   title: "Popular",
                                   height: 400.0,
-                                  width: Get.width * 0.3));
+                                  width: Get.width * 0.3,
+                                  category : _categorieIndex,
+                                ),
+                              );
                             },
                             child: Text(
                               "see All",
@@ -237,7 +241,7 @@ class _DashboardState extends State<Dashboard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 202,
+                          height: 212,
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             controller: _pageviewController,
@@ -254,7 +258,7 @@ class _DashboardState extends State<Dashboard> {
                                         horizontal: 8,
                                         vertical: 3,
                                       ),
-                                      height: 202,
+                                      height: 212,
                                       width: Get.width,
                                       child: Center(
                                         child: Column(
@@ -795,12 +799,12 @@ class _DashboardState extends State<Dashboard> {
                   vertical: 3,
                 ),
                 child: SizedBox(
-                  height: 202,
+                  height: 212,
                   width: Get.width * 0.55,
                   child: Item(
                       //key: const ObjectKey(),
                       width: Get.width * 0.55,
-                      height: 202,
+                      height: 212,
                       price: e.price,
                       rating: e.rating,
                       name: e.name,
@@ -820,10 +824,10 @@ class _DashboardState extends State<Dashboard> {
                 vertical: 3,
               ),
               child: SizedBox(
-                height: 202,
+                height: 212,
                 width: Get.width * 0.55,
                 child: ShimmerItem(
-                  height: 202,
+                  height: 212,
                   width: Get.width * 0.55,
                 ),
               ),
