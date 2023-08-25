@@ -245,58 +245,40 @@ class _DashboardState extends State<Dashboard> {
                               decelerationRate: ScrollDecelerationRate.fast,
                             ),
                             clipBehavior: Clip.antiAliasWithSaveLayer,
-                            children: isLoaded
-                                ? cards
-                                    .where((element) {
-                                      if (_categorieIndex == 0) {
-                                        return true;
-                                      } else if (_categorieIndex == 1) {
-                                        return element.category == 'Hotel';
-                                      } else {
-                                        return element.category == 'Villa';
-                                      }
-                                    })
-                                    .map(
-                                      (e) => Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 8,
-                                          vertical: 3,
-                                        ),
-                                        child: SizedBox(
-                                          height: 202,
-                                          width: Get.width * 0.55,
-                                          child: Item(
-                                              //key: const ObjectKey(),
-                                              width: Get.width * 0.55,
-                                              height: 202,
-                                              price: e.price,
-                                              rating: e.rating,
-                                              name: e.name,
-                                              location: e.location,
-                                              picturePath: e.picture,
-                                              stars: e.stars),
-                                        ),
-                                      ),
-                                    )
-                                    .toList()
-                                    .sublist(0, min(4, cards.length))
-                                : List.generate(
-                                    4,
-                                    (index) => Padding(
+                            children: showCards().isNotEmpty
+                                ? showCards()
+                                : [
+                                    Container(
+                                      alignment: Alignment.center,
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 8,
                                         vertical: 3,
                                       ),
-                                      child: SizedBox(
-                                        height: 202,
-                                        width: Get.width * 0.55,
-                                        child: ShimmerItem(
-                                          height: 202,
-                                          width: Get.width * 0.55,
+                                      height: 202,
+                                      width: Get.width,
+                                      child: Center(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.warning_sharp,
+                                              size: 42,
+                                              color: Colors.red.shade400,
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Text(
+                                              "Nothing found!",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineMedium!
+                                                  .copyWith(color: Colors.red),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ),
-                                  ),
+                                    )
+                                  ],
                           ),
                         ),
                       ],
@@ -792,5 +774,60 @@ class _DashboardState extends State<Dashboard> {
         ),
       ],
     );
+  }
+
+  List<Widget> showCards() {
+    return isLoaded
+        ? cards
+            .where((element) {
+              if (_categorieIndex == 0) {
+                return true;
+              } else if (_categorieIndex == 1) {
+                return element.category == 'Hotel';
+              } else {
+                return element.category == 'Villa';
+              }
+            })
+            .map(
+              (e) => Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 3,
+                ),
+                child: SizedBox(
+                  height: 202,
+                  width: Get.width * 0.55,
+                  child: Item(
+                      //key: const ObjectKey(),
+                      width: Get.width * 0.55,
+                      height: 202,
+                      price: e.price,
+                      rating: e.rating,
+                      name: e.name,
+                      location: e.location,
+                      picturePath: e.picture,
+                      stars: e.stars),
+                ),
+              ),
+            )
+            .toList()
+            .sublist(0)
+        : List.generate(
+            4,
+            (index) => Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 3,
+              ),
+              child: SizedBox(
+                height: 202,
+                width: Get.width * 0.55,
+                child: ShimmerItem(
+                  height: 202,
+                  width: Get.width * 0.55,
+                ),
+              ),
+            ),
+          );
   }
 }

@@ -18,8 +18,17 @@ class AccommodationsRepo {
         .eq('category', 'Villa')
         .order('rating', ascending: false)
         .limit(10);
-    final resH = ((await hotels).data) as List<Accommodations>;
-    final resV = ((await villas).data) as List<Accommodations>;
+
+    List<Accommodations> resH = [];
+    List<Accommodations> resV = [];
+
+    for (var element in ((await hotels) as List<dynamic>)) {
+      resH.add(Accommodations.fromJson(element));
+    }
+    for (var element in ((await villas) as List<dynamic>)) {
+      resH.add(Accommodations.fromJson(element));
+    }
+
     final res = (resV + resH);
     res.sort((a, b) => a.rating.compareTo(b.rating));
     return res;
