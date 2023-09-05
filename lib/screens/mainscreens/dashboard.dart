@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
@@ -11,7 +9,7 @@ import 'package:hotel_booking/screens/mainscreens/widgets/shimmer.dart';
 import 'package:hotel_booking/utils/style/material_theme.dart';
 import 'package:intl/intl.dart';
 
-import 'see_all.dart';
+import 'popular_see_all.dart';
 import 'utils/style.dart';
 import 'widgets/item_card.dart';
 import 'package:hotel_booking/repository/Places/places_repository.dart';
@@ -157,9 +155,7 @@ class _DashboardState extends State<Dashboard> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 5.0,
-                              ),
+                              const SizedBox(width: 5.0),
                               GestureDetector(
                                 onTap: () {},
                                 child: Container(
@@ -216,11 +212,11 @@ class _DashboardState extends State<Dashboard> {
                               }
                               Get.to(
                                 SeeAll(
-                                  hotels: cards,
+                                  accommodations: cards,
                                   title: "Popular",
                                   height: 400.0,
                                   width: Get.width * 0.3,
-                                  category : _categorieIndex,
+                                  category: _categorieIndex,
                                 ),
                               );
                             },
@@ -435,9 +431,7 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 3,
-                          ),
+                          const SizedBox(height: 3),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -450,9 +444,7 @@ class _DashboardState extends State<Dashboard> {
                                   style: Theme.of(context).textTheme.bodySmall,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 2,
-                              ),
+                              const SizedBox(height: 2),
                               FormBuilderTypeAhead<String>(
                                   name: "location",
                                   itemBuilder: (context, location) {
@@ -540,9 +532,7 @@ class _DashboardState extends State<Dashboard> {
                                   ])),
                             ],
                           ),
-                          const SizedBox(
-                            height: 4,
-                          ),
+                          const SizedBox(height: 4),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -563,9 +553,7 @@ class _DashboardState extends State<Dashboard> {
                                             .bodySmall,
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 2,
-                                    ),
+                                    const SizedBox(height: 2),
                                     FormBuilderDateTimePicker(
                                       name: "checkin",
                                       controller: _checkinController,
@@ -637,9 +625,7 @@ class _DashboardState extends State<Dashboard> {
                                   ],
                                 ),
                               ),
-                              const SizedBox(
-                                width: 4,
-                              ),
+                              const SizedBox(width: 4),
                               Expanded(
                                 flex: 3,
                                 child: Column(
@@ -656,9 +642,7 @@ class _DashboardState extends State<Dashboard> {
                                             .bodySmall,
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 2,
-                                    ),
+                                    const SizedBox(height: 2),
                                     FormBuilderDateTimePicker(
                                       name: "checkout",
                                       controller: _checkoutController,
@@ -737,9 +721,7 @@ class _DashboardState extends State<Dashboard> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 4,
-                    ),
+                    const SizedBox(height: 4),
                     ElevatedButton(
                       style:
                           Theme.of(context).elevatedButtonTheme.style!.copyWith(
@@ -767,9 +749,7 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 1,
-                    ),
+                    const SizedBox(height: 1),
                   ],
                 ),
               ),

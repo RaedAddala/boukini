@@ -181,7 +181,7 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
                           cursorColor: const Color(0xff0466c8),
                           style: const TextStyle(fontSize: 18),
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(8),
+                            contentPadding: const EdgeInsets.all(8),
                             hintText: "Enter Phone Number",
                             enabledBorder: _formBorder.copyWith(
                               borderSide: const BorderSide(

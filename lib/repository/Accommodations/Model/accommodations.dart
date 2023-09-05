@@ -7,6 +7,8 @@ class Accommodations {
   final String name;
   final String category;
   final String location;
+  final String country;
+
   final double price;
   final double rating;
   final String picture;
@@ -16,6 +18,7 @@ class Accommodations {
     required this.name,
     required this.category,
     required this.location,
+    required this.country,
     required this.price,
     required this.rating,
     required this.picture,

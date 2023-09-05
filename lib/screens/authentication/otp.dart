@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hotel_booking/config/routes.dart';
 import 'package:pinput/pinput.dart';
 
 import 'controllers/firebase_auth.dart';
 
 class OTPForm extends StatefulWidget {
+  final userExists = false;
   const OTPForm({super.key});
 
   @override
@@ -45,32 +47,43 @@ class _OTPFormState extends State<OTPForm> {
                       ),
                     ),
                     Expanded(
-                      child: Center(
-                        child: Container(
-                          decoration: const BoxDecoration(
-                              border: Border(bottom: BorderSide(width: 0.5))),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/images/Logo.png',
-                                filterQuality: FilterQuality.high,
-                                fit: BoxFit.scaleDown,
-                                width: 24.5,
-                                height: 24.5,
+                      child: Obx(
+                        () => _firebaseAuthController.isLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                  color: Color(0xff00b4d8),
+                                ),
+                              )
+                            : Center(
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(width: 0.5))),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/Logo.png',
+                                        filterQuality: FilterQuality.high,
+                                        fit: BoxFit.scaleDown,
+                                        width: 24.5,
+                                        height: 24.5,
+                                      ),
+                                      Text(
+                                        "oukini",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineLarge!
+                                            .copyWith(
+                                                color: Colors.cyan.shade600),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                              Text(
-                                "oukini",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge!
-                                    .copyWith(color: Colors.cyan.shade600),
-                              ),
-                            ],
-                          ),
-                        ),
                       ),
                     ),
                   ],
@@ -117,7 +130,7 @@ class _OTPFormState extends State<OTPForm> {
                 Pinput(
                   length: 6,
                   showCursor: true,
-                  onSubmitted: (value) {
+                  onCompleted: (value) {
                     setState(() {
                       otp = value;
                     });
@@ -211,5 +224,19 @@ class _OTPFormState extends State<OTPForm> {
     );
   }
 
-  void verifyOTP(String otp) {}
+  void verifyOTP(String otp) {
+    _firebaseAuthController.verifyOTP(
+      verificationId: verificationId,
+      userOTP: otp,
+      onSuccess: () {
+        if (widget.userExists) {
+          // Routes to Login
+          Get.toNamed(Routes.logIn);
+        } else {
+          // Routes to Sign up
+          Get.toNamed(Routes.signUp);
+        }
+      },
+    );
+  }
 }
