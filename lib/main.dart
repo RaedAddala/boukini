@@ -74,12 +74,12 @@ class MainApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      initialRoute: Routes.dashboard,
-      // _firstTime
-      // ? Routes.welcome
-      // : Globals.connected
-      //     ? Routes.dashboard
-      //     : Routes.phoneNumber,
+      initialRoute: //Routes.dashboard,
+          _firstTime
+              ? Routes.welcome
+              : Globals.connected
+                  ? Routes.dashboard
+                  : Routes.phoneNumber,
       getPages: getPages,
     );
   }

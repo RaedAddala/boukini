@@ -152,10 +152,7 @@ class PasswordFormState extends State<PasswordForm> {
                       ),
                     ),
                     onPressed: () {
-                      if (formKey.currentState != null &&
-                          formKey.currentState!.validate()) {
-                        controller.nextPage();
-                      }
+                      controller.nextPage();
                     },
                     child: busy
                         ? const CircularProgressIndicator(

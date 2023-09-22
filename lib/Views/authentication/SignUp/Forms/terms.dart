@@ -20,9 +20,11 @@ class TermsAndConditionsState extends State<TermsAndConditions> {
   bool scrolledtoEnd = false;
   String? termsAndConditions;
   @override
-  Future<void> initState() async {
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      loadAsset();
+    });
     super.initState();
-    termsAndConditions = await loadAsset();
   }
 
   @override
@@ -106,11 +108,8 @@ class TermsAndConditionsState extends State<TermsAndConditions> {
                             borderRadius: borderRadius,
                           ),
                         ),
-                        onPressed: agree
-                            ? () {
-                                controller.nextPage();
-                              }
-                            : null,
+                        onPressed: () => controller.nextPage(),
+                        
                         child: busy
                             ? const CircularProgressIndicator(
                                 valueColor:
@@ -133,8 +132,9 @@ class TermsAndConditionsState extends State<TermsAndConditions> {
       ],
     );
   }
-}
 
-Future<String> loadAsset() async {
-  return await rootBundle.loadString('assets/terms_conditions.txt');
+  void loadAsset() async {
+    termsAndConditions =
+        await rootBundle.loadString('assets/text/terms_conditions.txt');
+  }
 }

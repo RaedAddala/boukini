@@ -195,7 +195,7 @@ class Item extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
-                          .copyWith(fontWeight: FontWeight.bold),
+                          .copyWith(fontWeight: FontWeight.w500),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,

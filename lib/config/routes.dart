@@ -12,9 +12,9 @@ import '../screens/onboarding/welcome.dart';
 
 import 'globals.dart';
 
-const _transitionDuration = Duration(milliseconds: 200);
-const _transitionCurve = Curves.fastOutSlowIn;
-const _transitionType = Transition.native;
+const transitionDuration = Duration(milliseconds: 200);
+const transitionCurve = Curves.fastOutSlowIn;
+const transitionType = Transition.size;
 
 class Routes {
   static String signUp = '/signUp';
@@ -33,36 +33,36 @@ final getPages = [
     page: () {
       return const OTPForm();
     },
-    transition: _transitionType,
-    transitionDuration: _transitionDuration,
-    curve: _transitionCurve,
+    transition: transitionType,
+    transitionDuration: transitionDuration,
+    curve: transitionCurve,
   ),
   GetPage(
     name: Routes.onboarding,
     page: () {
       return Onboarding();
     },
-    transition: _transitionType,
-    transitionDuration: _transitionDuration,
-    curve: _transitionCurve,
+    transition: transitionType,
+    transitionDuration: transitionDuration,
+    curve: transitionCurve,
   ),
   GetPage(
     name: Routes.welcome,
     page: () {
       return const Welcome();
     },
-    transition: _transitionType,
-    transitionDuration: _transitionDuration,
-    curve: _transitionCurve,
+    transition: transitionType,
+    transitionDuration: transitionDuration,
+    curve: transitionCurve,
   ),
   GetPage(
     name: Routes.dashboard,
     page: () {
       return const MainScreen(index: 0);
     },
-    transition: _transitionType,
-    transitionDuration: _transitionDuration,
-    curve: _transitionCurve,
+    transition: transitionType,
+    transitionDuration: transitionDuration,
+    curve: transitionCurve,
     middlewares: [
       RouteGuard(),
     ],
@@ -72,29 +72,27 @@ final getPages = [
     page: () {
       return const PhoneNumberForm();
     },
-    transition: _transitionType,
-    transitionDuration: _transitionDuration,
-    curve: _transitionCurve,
+    transition: transitionType,
+    transitionDuration: transitionDuration,
+    curve: transitionCurve,
   ),
   GetPage(
     name: Routes.signUp,
     page: () {
       return const SignUpForms();
     },
-    transition: _transitionType,
-    transitionDuration: _transitionDuration,
-    curve: _transitionCurve,
+    transition: transitionType,
+    transitionDuration: transitionDuration,
+    curve: transitionCurve,
   ),
   GetPage(
     name: Routes.logIn,
     page: () {
-      return const LogInForms(
-        skipOtp: false,
-      );
+      return const LogInForms();
     },
-    transition: _transitionType,
-    transitionDuration: _transitionDuration,
-    curve: _transitionCurve,
+    transition: transitionType,
+    transitionDuration: transitionDuration,
+    curve: transitionCurve,
   ),
 ];
 

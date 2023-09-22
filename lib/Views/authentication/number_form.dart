@@ -197,7 +197,7 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
                               _formKey.currentState!.validate()) {
                             if (numberFound) {
                               Get.to(
-                                LogInForms(skipOtp: notSameSession),
+                                const LogInForms(),
                                 transition: Transition.leftToRightWithFade,
                                 arguments: <String, String>{
                                   "phone_number": _myController.text

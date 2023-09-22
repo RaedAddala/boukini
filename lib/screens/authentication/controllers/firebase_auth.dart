@@ -22,7 +22,6 @@ class AuthController extends GetxController {
         },
         verificationFailed: (error) => throw Exception(error.message),
         codeSent: (verificationId, forceResendingToken) {
-          Get.snackbar("Verfication Code", verificationId);
           if (Get.currentRoute == Routes.otp) {
             Get.parameters["number"] = phoneNumber;
             Get.parameters["verificationId"] = verificationId;
@@ -65,7 +64,7 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<bool> checkExistingUser({String? uid}) async {
+  Future<bool> checkExistingUser(String? uid) async {
     DocumentSnapshot snapshot =
         await _firebaseFirestore.collection("user").doc(uid ?? _uid).get();
     if (snapshot.exists) {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hotel_booking/screens/mainscreens/details.dart';
+import 'package:pinput/pinput.dart';
 import 'package:scroll_to_hide/scroll_to_hide.dart';
 
 import 'package:hotel_booking/config/routes.dart';
@@ -29,10 +31,12 @@ class SeeAll extends StatefulWidget {
 
 class _StateSeeAll extends State<SeeAll> {
   final ScrollController _scrollController = ScrollController();
+  static const double itemCardHeight = 125;
 
   List<Accommodations> hotels = [];
   List<Accommodations> villas = [];
   List<Accommodations> accommodations = [];
+  List<List<Accommodations>> all = [];
 
   int category = 0;
 
@@ -47,6 +51,9 @@ class _StateSeeAll extends State<SeeAll> {
         villas.add(item);
       }
     }
+    all.add(accommodations);
+    all.add(hotels);
+    all.add(villas);
     super.initState();
   }
 
@@ -58,6 +65,12 @@ class _StateSeeAll extends State<SeeAll> {
 
   @override
   Widget build(BuildContext context) {
+    // print(all[category].length);
+    // print(all[category]);
+    // print(accommodations);
+    // print(hotels);
+    // print(villas);
+
     const buttonColor = Color(0xffccff33);
     const overlayColor = Color(0xffc0ff70);
     const surfaceTintColor = Color(0xfff0f9fa);
@@ -67,7 +80,6 @@ class _StateSeeAll extends State<SeeAll> {
           fontWeight: FontWeight.bold,
           fontSize: 21,
         );
-    const double itemCardHeight = 125;
     return WillPopScope(
       onWillPop: () {
         Get.offNamed(Routes.dashboard);
@@ -272,30 +284,15 @@ class _StateSeeAll extends State<SeeAll> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(
-                          decelerationRate: ScrollDecelerationRate.fast,
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1,
+                          mainAxisSpacing: 1,
+                          childAspectRatio: 1 / 0.35,
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: ((category == 0)
-                                  ? accommodations
-                                  : (category == 1)
-                                      ? hotels
-                                      : villas)
-                              .map((e) => ItemCard(
-                                    height: itemCardHeight,
-                                    picUrl: e.picture,
-                                    location: e.location,
-                                    name: e.name,
-                                    stars: e.stars,
-                                    id: e.id,
-                                    price: e.price,
-                                    rating: e.rating,
-                                  ))
-                              .toList(),
-                        ),
+                        itemCount: 1 + all[category].length,
+                        itemBuilder: itemBuilder,
                       ),
                     ),
                   ),
@@ -308,4 +305,32 @@ class _StateSeeAll extends State<SeeAll> {
       ),
     );
   }
+
+  Widget? itemBuilder(BuildContext context, int index) =>
+      (index < all[category].length)
+          ? GestureDetector(
+              onTap: () => Get.to(
+                Details(id: all[category][index].id),
+                transition: transitionType,
+                duration: transitionDuration,
+                curve: transitionCurve,
+              ),
+              child: ItemCard(
+                height: itemCardHeight,
+                picUrl: all[category][index].picture,
+                location: all[category][index].location,
+                name: all[category][index].name,
+                stars: all[category][index].stars,
+                id: all[category][index].id,
+                price: all[category][index].price,
+                rating: all[category][index].rating,
+              ),
+            )
+          : Container();
+  // : const Padding(
+  //     padding: EdgeInsets.symmetric(vertical: 32),
+  //     child: Center(
+  //       child: CircularProgressIndicator(),
+  //     ),
+  // );
 }

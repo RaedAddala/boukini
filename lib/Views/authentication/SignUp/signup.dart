@@ -3,9 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking/utils/style/screen.dart';
 
-import '../../controllers/form_colors_controller.dart';
 import '../controllers/page_controller.dart';
-import '../otp_verification.dart';
 import 'Forms/credentials.dart';
 import 'Forms/password.dart';
 import 'Forms/terms.dart';
@@ -18,12 +16,10 @@ class SignUpForms extends StatefulWidget {
 
 class _SignUpFormsState extends State<SignUpForms> {
   late final PageController pagecontroller;
-  static const int _numberOfWidgets = 4;
-  static const int _initialPage = 0;
+  static const int _numberOfWidgets = 3;
 
   final FormPageController controller =
-      Get.put(FormPageController(_numberOfWidgets, _initialPage));
-  final GlobalFormThemeVarController globals = Get.find();
+      Get.put(FormPageController(_numberOfWidgets));
   @override
   void initState() {
     super.initState();
@@ -37,7 +33,6 @@ class _SignUpFormsState extends State<SignUpForms> {
     super.dispose();
   }
 
-  final GlobalKey<FormBuilderState> _otpformKey = GlobalKey<FormBuilderState>();
   final GlobalKey<FormBuilderState> _credentialsformkey =
       GlobalKey<FormBuilderState>();
   final GlobalKey<FormBuilderState> _passwordformkey =
@@ -53,12 +48,12 @@ class _SignUpFormsState extends State<SignUpForms> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 4,
-          shadowColor: globals.appBarShadowColor,
-          backgroundColor: globals.appBarbackgroundColor,
+          shadowColor: Theme.of(context).shadowColor,
+          backgroundColor: Theme.of(context).primaryColorDark,
           leading: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: BackButton(
-              color: globals.appBarElementsColor,
+              color: Theme.of(context).colorScheme.onPrimary,
               onPressed: () {
                 controller.prevPage();
               },
@@ -70,7 +65,10 @@ class _SignUpFormsState extends State<SignUpForms> {
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: Text(
                 "Sign Up",
-                style: globals.appBarTitleStyle,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge!
+                    .copyWith(color: Theme.of(context).colorScheme.onPrimary),
               ),
             ),
           ),
@@ -80,7 +78,7 @@ class _SignUpFormsState extends State<SignUpForms> {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Container(
               padding: const EdgeInsets.all(12),
-              color: globals.scaffoldbackgroundColor,
+              color: Theme.of(context).scaffoldBackgroundColor,
               constraints: BoxConstraints(maxHeight: screenHeight(context)),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -130,10 +128,6 @@ class _SignUpFormsState extends State<SignUpForms> {
                       physics: const NeverScrollableScrollPhysics(),
                       controller: pagecontroller,
                       children: <Widget>[
-                        OTPverificationForm(
-                          formKey: _otpformKey,
-                          phoneNumber: Get.arguments["phone_number"],
-                        ),
                         CredentialForm(
                           formKey: _credentialsformkey,
                         ),

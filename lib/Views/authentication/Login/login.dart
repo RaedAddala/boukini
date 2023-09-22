@@ -6,12 +6,10 @@ import '../../../utils/style/screen.dart';
 import '../../../utils/style/spaces.dart';
 import '../../../utils/style/theme.dart';
 import '../controllers/page_controller.dart';
-import '../otp_verification.dart';
 import 'Forms/enter_pass.dart';
 
 class LogInForms extends StatefulWidget {
-  final bool skipOtp;
-  const LogInForms({super.key, required this.skipOtp});
+  const LogInForms({super.key});
   @override
   State<LogInForms> createState() => _LogInFormsState();
 }
@@ -27,13 +25,11 @@ class _LogInFormsState extends State<LogInForms> {
 
   @override
   Widget build(BuildContext context) {
-    const int numberOfWidgets = 2;
-    final int initialPage = (widget.skipOtp) ? 1 : 0;
+    const int numberOfWidgets =1;
     final FormPageController controller =
-        Get.put(FormPageController(numberOfWidgets, initialPage));
+        Get.put(FormPageController(numberOfWidgets));
     pagecontroller = controller.pagecontroller;
-    final GlobalKey<FormBuilderState> otpformKey =
-        GlobalKey<FormBuilderState>();
+
     final GlobalKey<FormBuilderState> verifyPasswordFormKey =
         GlobalKey<FormBuilderState>();
     return WillPopScope(
@@ -88,11 +84,6 @@ class _LogInFormsState extends State<LogInForms> {
                       // must be modified
                     },
                     children: <Widget>[
-                      /* ALL The Forms will be here */
-                      OTPverificationForm(
-                        formKey: otpformKey,
-                        phoneNumber: Get.arguments["phone_number"],
-                      ),
                       VerifyPasswordForm(formKey: verifyPasswordFormKey),
                     ],
                   ),

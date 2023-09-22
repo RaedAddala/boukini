@@ -5,17 +5,16 @@ import 'package:hotel_booking/config/routes.dart';
 
 class FormPageController extends GetxController {
   final int numberOfPages;
-  final int initialPage;
   late final PageController pagecontroller;
   int currPage = 0;
-  FormPageController(this.numberOfPages, this.initialPage) {
+  FormPageController(this.numberOfPages) {
     pagecontroller = PageController(
-      initialPage: initialPage,
+      initialPage: 0,
     );
   }
   void nextPage() {
     if (currPage == numberOfPages - 1) {
-      //Get.offAllNamed(Routes.dashboard);
+      Get.offAllNamed(Routes.dashboard);
     } else {
       pagecontroller.nextPage(
         duration: const Duration(milliseconds: 500),

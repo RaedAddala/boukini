@@ -93,7 +93,7 @@ class ItemCard extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!
-                          .copyWith(fontWeight: FontWeight.w900, fontSize: 18),
+                          .copyWith(fontWeight: FontWeight.w600, fontSize: 16),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -139,7 +139,7 @@ class ItemCard extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge!
-                              .copyWith(fontWeight: FontWeight.bold),
+                              .copyWith(fontWeight: FontWeight.w500),
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,

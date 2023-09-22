@@ -3,8 +3,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:hotel_booking/config/routes.dart';
 import 'package:hotel_booking/repository/Accommodations/Model/accommodations.dart';
 import 'package:hotel_booking/repository/Accommodations/accomodations_repo.dart';
+import 'package:hotel_booking/screens/mainscreens/details.dart';
 import 'package:hotel_booking/screens/mainscreens/widgets/shimmer.dart';
 import 'package:hotel_booking/utils/style/material_theme.dart';
 import 'package:intl/intl.dart';
@@ -61,6 +63,14 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final double cardsHeight = Get.height * 0.35;
+    final double cardsWidth = Get.width * 0.6;
+
+    final double formHeight = Get.height * 0.35;
+    final double firstContainerPadding = Get.height * 0.042;
+    final double formStart = Get.height * 0.12;
+    final double formSpacesAround = Get.height * 0.01;
+
     final txtStyle = Theme.of(context).textTheme.labelSmall;
     final activeTxtStyle = Theme.of(context)
         .textTheme
@@ -74,7 +84,7 @@ class _DashboardState extends State<Dashboard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColorDark,
@@ -84,8 +94,8 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 18.0, horizontal: 14.0),
+                  padding: EdgeInsets.symmetric(
+                      vertical: firstContainerPadding, horizontal: 14.0),
                   child: Column(
                     children: [
                       Row(
@@ -185,15 +195,18 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             Expanded(
-              flex: 3,
+              flex: 5,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0,
+                        vertical: 2.0,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -237,7 +250,7 @@ class _DashboardState extends State<Dashboard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 212,
+                          height: cardsHeight,
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             controller: _pageviewController,
@@ -245,8 +258,9 @@ class _DashboardState extends State<Dashboard> {
                               decelerationRate: ScrollDecelerationRate.fast,
                             ),
                             clipBehavior: Clip.antiAliasWithSaveLayer,
-                            children: showCards().isNotEmpty
-                                ? showCards()
+                            children: showCards(cardsHeight, cardsWidth)
+                                    .isNotEmpty
+                                ? showCards(cardsHeight, cardsWidth)
                                 : [
                                     Container(
                                       alignment: Alignment.center,
@@ -254,7 +268,7 @@ class _DashboardState extends State<Dashboard> {
                                         horizontal: 8,
                                         vertical: 3,
                                       ),
-                                      height: 212,
+                                      height: Get.height * 0.3,
                                       width: Get.width,
                                       child: Center(
                                         child: Column(
@@ -290,13 +304,14 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
         Positioned(
-          top: 68,
+          top: formStart,
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: screenWidthPercentage(context, percentage: 0.11),
             ),
             child: Container(
               width: screenWidthPercentage(context, percentage: 0.78),
+              height: formHeight,
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.onPrimary,
                 borderRadius: BorderRadius.circular(22),
@@ -308,16 +323,18 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ],
               ),
-              child: Padding(
+              child: Container(
                 padding: const EdgeInsets.symmetric(
-                  vertical: 4.0,
+                  vertical: 5.0,
                   horizontal: 12.0,
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     FormBuilder(
                       key: formKey,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           // Categories
                           Row(
@@ -431,7 +448,7 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 3),
+                          SizedBox(height: formSpacesAround),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -532,7 +549,8 @@ class _DashboardState extends State<Dashboard> {
                                   ])),
                             ],
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: formSpacesAround),
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -717,11 +735,11 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             ],
                           ),
+
                           // Search Button
                         ],
                       ),
                     ),
-                    const SizedBox(height: 4),
                     ElevatedButton(
                       style:
                           Theme.of(context).elevatedButtonTheme.style!.copyWith(
@@ -749,7 +767,6 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                       ),
                     ),
-                    const SizedBox(height: 1),
                   ],
                 ),
               ),
@@ -760,7 +777,7 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  List<Widget> showCards() {
+  List<Widget> showCards(double cardsHeight, double cardsWidth) {
     return isLoaded
         ? cards
             .where((element) {
@@ -778,24 +795,32 @@ class _DashboardState extends State<Dashboard> {
                   horizontal: 8,
                   vertical: 3,
                 ),
-                child: SizedBox(
-                  height: 212,
-                  width: Get.width * 0.55,
-                  child: Item(
+                child: GestureDetector(
+                  onTap: () => Get.to(
+                    Details(id: e.id),
+                    transition: transitionType,
+                    duration: transitionDuration,
+                    curve: transitionCurve,
+                  ),
+                  child: SizedBox(
+                    height: cardsHeight,
+                    width: cardsWidth,
+                    child: Item(
                       //key: const ObjectKey(),
-                      width: Get.width * 0.55,
-                      height: 212,
+                      width: cardsWidth,
+                      height: cardsHeight,
                       price: e.price,
                       rating: e.rating,
                       name: e.name,
                       location: e.location,
                       picturePath: e.picture,
-                      stars: e.stars),
+                      stars: e.stars,
+                    ),
+                  ),
                 ),
               ),
             )
             .toList()
-            .sublist(0)
         : List.generate(
             4,
             (index) => Padding(
@@ -804,11 +829,11 @@ class _DashboardState extends State<Dashboard> {
                 vertical: 3,
               ),
               child: SizedBox(
-                height: 212,
-                width: Get.width * 0.55,
+                height: cardsHeight,
+                width: cardsWidth,
                 child: ShimmerItem(
-                  height: 212,
-                  width: Get.width * 0.55,
+                  height: cardsHeight,
+                  width: cardsWidth,
                 ),
               ),
             ),

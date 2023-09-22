@@ -38,6 +38,8 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   cached_network_image: ^3.2.3
   scroll_to_hide: ^2.0.1
+  animations: ^2.0.8
+  syncfusion_flutter_datepicker: ^22.2.12
 
 dev_dependencies:
   flutter_test:

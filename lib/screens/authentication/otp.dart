@@ -7,7 +7,6 @@ import 'package:pinput/pinput.dart';
 import 'controllers/firebase_auth.dart';
 
 class OTPForm extends StatefulWidget {
-  final userExists = false;
   const OTPForm({super.key});
 
   @override
@@ -225,18 +224,20 @@ class _OTPFormState extends State<OTPForm> {
   }
 
   void verifyOTP(String otp) {
-    _firebaseAuthController.verifyOTP(
-      verificationId: verificationId,
-      userOTP: otp,
-      onSuccess: () {
-        if (widget.userExists) {
-          // Routes to Login
-          Get.toNamed(Routes.logIn);
-        } else {
-          // Routes to Sign up
-          Get.toNamed(Routes.signUp);
-        }
-      },
-    );
+    Get.toNamed(Routes.signUp);
+    // _firebaseAuthController.verifyOTP(
+    //   verificationId: verificationId,
+    //   userOTP: otp,
+    //   onSuccess: () async {
+    //     if (await _firebaseAuthController
+    //         .checkExistingUser(_firebaseAuthController.uid)) {
+    //       // Routes to Login
+    //       Get.toNamed(Routes.logIn);
+    //     } else {
+    //       // Routes to Sign up
+    //       Get.toNamed(Routes.signUp);
+    //     }
+    //   },
+    // );
   }
 }

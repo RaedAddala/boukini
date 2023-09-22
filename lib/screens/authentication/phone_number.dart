@@ -7,6 +7,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking/config/consume_services.dart';
 import 'package:hotel_booking/config/globals.dart';
+import 'package:hotel_booking/config/routes.dart';
 
 import 'controllers/firebase_auth.dart';
 
@@ -290,8 +291,20 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
 
   void sendPhoneNumber() {
     String phoneNumber = _myController.text;
-    _firebaseAuthController.signWithPhone(
-      "+${country.phoneCode}$phoneNumber",
-    );
+    // _firebaseAuthController.signWithPhone(
+    //   "+${country.phoneCode}$phoneNumber",
+    // );
+    if (Get.currentRoute == Routes.otp) {
+      Get.parameters["number"] = phoneNumber;
+      Get.parameters["verificationId"] = "000000";
+    } else {
+      Get.toNamed(
+        Routes.otp,
+        parameters: {
+          "verificationId": "000000",
+          "number": phoneNumber,
+        },
+      );
+    }
   }
 }
